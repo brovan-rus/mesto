@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  justify-content: flex-start;
+  width: calc(133.33px + 7 * 100vw / 12);
+  border-bottom: 1px solid rgba(84,84,84,.7);
+  padding: calc(22.33px + 17 * 100vw / 960) 0 calc(26.66px + 100vw / 96) 0;
+}
+
+@media screen and (min-width: 1280px) {
+  .header{
+    padding: 45px 0 40px 0;
+    width: 68.75%;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .header{
+    padding-left: calc(59px - 0.1 * 100vw);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header{
+    padding: 28px 0 30px 27px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
