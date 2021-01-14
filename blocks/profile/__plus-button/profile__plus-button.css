@@ -7,13 +7,12 @@
   box-sizing: border-box;
   width: 150px;
   height: 50px;
-  border: 1px solid white;
+  border: 2px solid white;
   justify-self: end;
   grid-column: 3/5;
   align-self: center;
+  transition: opacity 0.3s linear;
 }
-
-
 
 @media screen and (max-width: 920px) {
   .profile__plus-button{
@@ -22,4 +21,9 @@
     grid-column: 1/1;
     justify-self: center;
   }
+}
+
+.profile__plus-button:hover{
+  cursor: pointer;
+  opacity: 0.6;
 }

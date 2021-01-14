@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   box-sizing: border-box;
   background-position: center;
+  transition: opacity 0.3s linear;
 }
 
 @media screen and (min-width: 1280px){
@@ -21,4 +22,9 @@
     height: 18px;
     align-self: center;
   }
+}
+
+.profile__edit-button:hover{
+  cursor: pointer;
+  opacity: 0.6;
 }
