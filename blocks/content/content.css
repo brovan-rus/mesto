@@ -1,0 +1,15 @@
+.content {
+  width: calc(133.33px + 7 * 100vw / 12);
+}
+
+@media screen and (min-width: 1280px) {
+  .content{
+    width: 880px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .content{
+    width: 100%;
+  }
+}

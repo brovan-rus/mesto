@@ -1,11 +1,27 @@
 @import url('../vendor/normalize.css');
 @import url('../vendor/fonts/fonts.css');
 @import url('../blocks/page/page.css');
+@import url('../blocks/page/__header/page__header.css');
+@import url('../blocks/page/__content/page__content.css');
 @import url('../blocks/page/_position/page_position_center.css');
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/header/header.css');
 @import url('../blocks/header/__logo/header__logo.css');
 @import url('../blocks/content/content.css');
+@import url('../blocks/content/__profile/content__profile.css');
 @import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__container/profile__container.css');
+@import url('../blocks/profile/__edit-button/profile__edit-button.css');
+@import url('../blocks/profile/__job/profile__job.css');
+@import url('../blocks/profile/__name-containter/profile__name-containter.css');
+@import url('../blocks/profile/__name/profile__name.css');
+@import url('../blocks/profile/__photo/profile__photo.css');
+@import url('../blocks/profile/__plus-button/profile__plus-button.css');
 @import url('../blocks/cards/cards.css');
 @import url('../blocks/footer/footer.css');
+
+/*
+section {
+  border: 1px solid red;
+}
+*/

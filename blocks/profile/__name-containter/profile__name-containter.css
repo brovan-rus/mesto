@@ -1,0 +1,10 @@
+.profile__name-containter {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 920px){
+  .profile__name-containter{
+    margin-bottom: 14px;
+  }
+}
