@@ -1,0 +1,16 @@
+.page__footer {
+  margin-bottom: calc(28px + 100vw / 40);
+}
+
+@media screen and (min-width: 1280px){
+  .page__footer{
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .page__footer{
+    margin-bottom: 36px;
+  }
+}
+
