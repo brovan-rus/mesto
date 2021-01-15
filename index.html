@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Константин Бровцев">
-  <meta name="description" content="Учебный сайт mesto представляет собой интерактивную страницу, куда можно добавлять фотографии, удалять их и ставить лайки">
+  <meta name="description"
+    content="Учебный сайт mesto представляет собой интерактивную страницу, куда можно добавлять фотографии, удалять их и ставить лайки">
   <meta name="copyright" content="Yandex Praktikum">
   <link rel="stylesheet" href="pages/pages.css">
   <title>Mesto. Russia.</title>
 </head>
+
 <body>
   <div class="page page_position_center">
     <header class="header page__header">
@@ -22,14 +25,12 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <div class="profile__edit-button"></div>
           </div>
-          <p class="profile__job">Исследователь океана</p></div>
+          <p class="profile__job">Исследователь океана</p>
+        </div>
         <div class="profile__plus-button"></div>
       </section>
-
       <section class="cards content__cards">
-
         <ul class="cards__list">
-
           <li class="card__list-element">
             <div class="card">
               <img class="card__image" src="./images/kazan.jpg" alt="Фотография города Казань, мечеть Кул-Шариф">
@@ -39,7 +40,6 @@
               </div>
             </div>
           </li>
-
           <li class="card__list-element">
             <div class="card">
               <img class="card__image" src="./images/ruskeala.jpg" alt="Фотография мраморного каньона в Рускеале"></img>
@@ -49,17 +49,16 @@
               </div>
             </div>
           </li>
-
           <li class="card__list-element">
             <div class="card">
-              <img class="card__image" src="./images/Spb.jpg" alt="Фотография арки Генерального штаба в Санкт-Петербурге">
+              <img class="card__image" src="./images/Spb.jpg"
+                alt="Фотография арки Генерального штаба в Санкт-Петербурге">
               <div class="card__description">
                 <h3 class="card__title">Санкт-Петербург</h3>
                 <div class="card__like-button"></div>
               </div>
             </div>
           </li>
-
           <li class="card__list-element">
             <div class="card">
               <img class="card__image" src="./images/viborg.jpg" alt="Фотография озеро рядом с городом Выборг">
@@ -69,17 +68,16 @@
               </div>
             </div>
           </li>
-
           <li class="card__list-element">
             <div class="card">
-              <img class="card__image" src="./images/Vnovgorod.jpg" alt="Фотография с видом на стену кремля Великого Новгорода">
+              <img class="card__image" src="./images/Vnovgorod.jpg"
+                alt="Фотография с видом на стену кремля Великого Новгорода">
               <div class="card__description">
                 <h3 class="card__title">Великий Новгород</h3>
                 <div class="card__like-button"></div>
               </div>
             </div>
           </li>
-
           <li class="card__list-element">
             <div class="card">
               <img class="card__image" src="./images/elbrus.jpg" alt="Фотография с видом на гору Эльбрус">
@@ -96,7 +94,16 @@
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-
+    <div class="popup">
+      <div class="popup__container">
+        <div class="popup__close-button"></div>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__form-name" type="text" id="name" placeholder="Жак-Ив Кусто">
+        <input class="popup__form-job" type="text" id="job" placeholder="Исследователь океана">
+        <button class="popup__submit-button" type="submit">Сохранить</button>
+      </div>
+    </div>
   </div>
 </body>
+
 </html>
