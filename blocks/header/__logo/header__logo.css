@@ -1,9 +1,15 @@
 .header__logo {
+  display: block;
   background-image: url('../../../images/logo.svg');
   width: calc(90px + 13 * 100vw / 320);
   height: calc(21px + 3 * 100vw / 320);
   background-repeat: no-repeat;
   background-size: contain;
+  transition: background-image .6s linear;
+}
+
+.header__logo:hover{
+  background-image: url('../../../images/logo-black.svg');
 }
 
 @media screen and (min-width: 1280px) {
@@ -19,5 +25,6 @@
     height: 24px;
   }
 }
+
 
 
