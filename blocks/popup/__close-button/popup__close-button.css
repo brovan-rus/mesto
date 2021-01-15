@@ -2,7 +2,7 @@
   width: 40px;
   height: 40px;
   position: absolute;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0);
   top: -40px;
   right: -40px;
   box-sizing: border-box;
