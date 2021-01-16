@@ -4,8 +4,8 @@ function openPopup(){
   let profileJob = document.querySelector('.profile__job');
   let formName = document.querySelector('.popup__form-name');
   let formJob = document.querySelector('.popup__form-job');
-  formName.placeholder=profileName.textContent;
-  formJob.placeholder=profileJob.textContent;
+ // formName.placeholder=profileName.textContent;
+ // formJob.placeholder=profileJob.textContent;
   popupWindow.classList.add('popup_opened');
 }
 

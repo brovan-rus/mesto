@@ -12,6 +12,7 @@
   grid-column: 3/5;
   align-self: center;
   transition: opacity 0.3s linear;
+  background-color: inherit;
 }
 
 @media screen and (max-width: 920px) {

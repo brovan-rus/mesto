@@ -25,11 +25,11 @@
         <div class="profile__container">
           <div class=profile__name-containter>
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <div class="profile__edit-button"></div>
+            <button type="button" class="profile__edit-button"></button>
           </div>
           <p class="profile__job">Исследователь океана</p>
         </div>
-        <div class="profile__plus-button"></div>
+        <button type="button" class="profile__plus-button"></button>
       </section>
       <section class="cards content__cards">
         <ul class="cards__list">
@@ -37,8 +37,8 @@
             <div class="card">
               <img class="card__image" src="./images/kazan.jpg" alt="Фотография города Казань, мечеть Кул-Шариф">
               <div class="card__description">
-                <h3 class="card__title">Казань</h3>
-                <div class="card__like-button"></div>
+                <h2 class="card__title">Казань</h2>
+                <button type="button" class="card__like-button"></button>
               </div>
             </div>
           </li>
@@ -46,8 +46,8 @@
             <div class="card">
               <img class="card__image" src="./images/ruskeala.jpg" alt="Фотография мраморного каньона в Рускеале">
               <div class="card__description">
-                <h3 class="card__title">Рускеала</h3>
-                <div class="card__like-button"></div>
+                <h2 class="card__title">Рускеала</h2>
+                <button type="button" class="card__like-button"></button>
               </div>
             </div>
           </li>
@@ -56,8 +56,8 @@
               <img class="card__image" src="./images/Spb.jpg"
                 alt="Фотография арки Генерального штаба в Санкт-Петербурге">
               <div class="card__description">
-                <h3 class="card__title">Санкт-Петербург</h3>
-                <div class="card__like-button"></div>
+                <h2 class="card__title">Санкт-Петербург</h2>
+                <button type="button" class="card__like-button"></button>
               </div>
             </div>
           </li>
@@ -65,8 +65,8 @@
             <div class="card">
               <img class="card__image" src="./images/viborg.jpg" alt="Фотография озеро рядом с городом Выборг">
               <div class="card__description">
-                <h3 class="card__title">Выборг</h3>
-                <div class="card__like-button"></div>
+                <h2 class="card__title">Выборг</h2>
+                <button type="button" class="card__like-button"></button>
               </div>
             </div>
           </li>
@@ -75,8 +75,8 @@
               <img class="card__image" src="./images/Vnovgorod.jpg"
                 alt="Фотография с видом на стену кремля Великого Новгорода">
               <div class="card__description">
-                <h3 class="card__title">Великий Новгород</h3>
-                <div class="card__like-button"></div>
+                <h2 class="card__title">Великий Новгород</h2>
+                <button type="button" class="card__like-button"></button>
               </div>
             </div>
           </li>
@@ -84,8 +84,8 @@
             <div class="card">
               <img class="card__image" src="./images/elbrus.jpg" alt="Фотография с видом на гору Эльбрус">
               <div class="card__description">
-                <h3 class="card__title">Гора Эльбрус</h3>
-                <div class="card__like-button"></div>
+                <h2 class="card__title">Гора Эльбрус</h2>
+                <button type="button" class="card__like-button"></button>
               </div>
             </div>
           </li>
@@ -100,12 +100,14 @@
       <div class="popup__container">
         <div class="popup__close-button"></div>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__form-name" type="text" id="name">
-        <input class="popup__form-job" type="text" id="job" placeholder="">
-        <button class="popup__submit-button" type="submit">Сохранить</button>
+        <form name="popup-form">
+          <input class="popup__form-field popup__form-field_info_name" type="text" name="profile-name" placeholder="Имя">
+          <input class="popup__form-field popup__form-field_info_job" type="text" name="profile-job" placeholder="О себе">
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
       </div>
     </div>
   </div>
-  <script src="./script/edit-profile.js"></script>
+  <script src="./script/script.js"></script>
 </body>
 </html>

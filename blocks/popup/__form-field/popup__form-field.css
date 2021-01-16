@@ -1,4 +1,10 @@
-.popup__form-name{
+.popup__form-field{
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
   width: 358px;
   height: 45px;
   border: 0;
@@ -9,11 +15,16 @@
   margin-bottom: 15px;
 }
 
-.popup__form-name:focus{
+.popup__form-field:last-of-type{
+    margin-bottom: 48px;
+  }
+
+
+.popup__form-field:focus{
   border: 1px solid rgba(0, 0, 0, .2);
 }
 
-.popup__form-name::placeholder{
+.popup__form-field::placeholder{
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -23,7 +34,10 @@
 }
 
 @media screen and (max-width: 520px){
-  .popup__form-name{
+  .popup__form-field{
     width: 238px;
+  }
+  .popup__form-field:last-of-type{
+    margin-bottom: 45px;
   }
 }

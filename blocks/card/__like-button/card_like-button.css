@@ -6,6 +6,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   transition: opacity 0.3s linear;
+  background-color: inherit;
+  border: 0;
 }
 
 .card__like-button:hover{

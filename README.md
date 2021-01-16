@@ -1,6 +1,6 @@
 # Проект 4: Место
 ## Яндекс Практикум
-(https://brovan-rus.github.io/russian-travel/)
+(https://brovan-rus.github.io/mesto/index.html)
 ***
 
 ### Обзор

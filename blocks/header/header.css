@@ -16,13 +16,13 @@
 @media screen and (max-width: 590px) {
   .header{
     padding-left: calc(59px - 0.1 * 100vw);
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
 @media screen and (max-width: 320px) {
   .header{
     padding: 28px 0 30px 27px;
-    width: 100%;
-    box-sizing: border-box;
   }
 }
