@@ -22,6 +22,7 @@ function formSubmit(evt){
   let formJob = document.querySelector('.popup__form-job');
   profileName.textContent=formName.value;
   profileJob.textContent=formJob.value;
+  closePopup();
 }
 
 let formElement = document.querySelector('.popup__container');

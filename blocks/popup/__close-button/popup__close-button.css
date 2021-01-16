@@ -5,12 +5,12 @@
   background-color: rgba(0, 0, 0, 0);
   top: -40px;
   right: -40px;
-  box-sizing: border-box;
   background-image: url('../../../images/CloseIcon.svg');
   background-repeat: no-repeat;
   transition: opacity 0.3s linear;
   cursor: pointer;
-  background-size: contain;
+  background-position: center;
+  box-sizing: border-box;
 }
 
 .popup__close-button:hover{
@@ -22,7 +22,8 @@
     width: 26px;
     height: 26px;
     right: 0;
-    top: -45;
+    top: -47px;
+    background-image: url(../../../images/CloseIconMobile.svg);
   }
 }
 

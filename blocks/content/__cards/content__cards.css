@@ -2,7 +2,7 @@
   margin-bottom: calc(42px + 3 * 100vw / 60);
 }
 
-@media screen and (max-width: 1280) {
+@media screen and (max-width: 1280px) {
   .content__cards {
     margin-bottom: 66px;
   }

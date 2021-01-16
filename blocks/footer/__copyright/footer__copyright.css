@@ -5,6 +5,7 @@
   font-size: calc(12.66px + 100vw / 240);
   line-height: calc(15.33px + 100vw / 192);
   color: #545454;
+  margin: 0;
 }
 
 @media screen and (min-width: 1280px){

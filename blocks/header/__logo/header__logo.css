@@ -5,11 +5,11 @@
   height: calc(21px + 3 * 100vw / 320);
   background-repeat: no-repeat;
   background-size: contain;
-  transition: background-image .6s linear;
+  transition: opacity .3s linear;
 }
 
 .header__logo:hover{
-  background-image: url('../../../images/logo-black.svg');
+  opacity: .6;
 }
 
 @media screen and (min-width: 1280px) {
