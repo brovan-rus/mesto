@@ -1,6 +1,5 @@
 let popupWindow = document.querySelector('.popup');
 let formElement = document.querySelector('.popup__container form');
-let submitButton = formElement.querySelector('.popup__submit-button');
 let formName = formElement.querySelector('.popup__form-field_info_name');
 let formJob = formElement.querySelector('.popup__form-field_info_job');
 let profileName = document.querySelector('.profile__name');

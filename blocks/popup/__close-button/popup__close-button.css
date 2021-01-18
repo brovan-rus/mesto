@@ -11,6 +11,7 @@
   cursor: pointer;
   background-position: center;
   box-sizing: border-box;
+  border: 0;
 }
 
 .popup__close-button:hover{
