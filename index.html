@@ -32,64 +32,6 @@
         <button type="button" class="profile__plus-button"></button>
       </section>
       <section class="cards content__cards">
-        <ul class="cards__list">
-          <li>
-            <div class="card">
-              <img class="card__image" src="./images/kazan.jpg" alt="Фотография города Казань, мечеть Кул-Шариф">
-              <div class="card__description">
-                <h2 class="card__title">Казань</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="card">
-              <img class="card__image" src="./images/ruskeala.jpg" alt="Фотография мраморного каньона в Рускеале">
-              <div class="card__description">
-                <h2 class="card__title">Рускеала</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="card">
-              <img class="card__image" src="./images/Spb.jpg"
-                alt="Фотография арки Генерального штаба в Санкт-Петербурге">
-              <div class="card__description">
-                <h2 class="card__title">Санкт-Петербург</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="card">
-              <img class="card__image" src="./images/viborg.jpg" alt="Фотография озеро рядом с городом Выборг">
-              <div class="card__description">
-                <h2 class="card__title">Выборг</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="card">
-              <img class="card__image" src="./images/Vnovgorod.jpg"
-                alt="Фотография с видом на стену кремля Великого Новгорода">
-              <div class="card__description">
-                <h2 class="card__title">Великий Новгород</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="card">
-              <img class="card__image" src="./images/elbrus.jpg" alt="Фотография с видом на гору Эльбрус">
-              <div class="card__description">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </div>
-          </li>
-        </ul>
       </section>
     </main>
     <footer class="footer page__footer">
@@ -108,6 +50,19 @@
       </div>
     </div>
   </div>
+
+  <template id="card">
+      <li>
+        <div class="card">
+          <img class="card__image" src="./images/kazan.jpg" alt="Фотография города Казань, мечеть Кул-Шариф">
+          <div class="card__description">
+            <h2 class="card__title">Казань</h2>
+            <button type="button" class="card__like-button"></button>
+          </div>
+        </div>
+      </li>
+  </template>
+
   <script src="./script/script.js"></script>
 </body>
 </html>
