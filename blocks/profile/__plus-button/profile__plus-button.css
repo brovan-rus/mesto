@@ -1,7 +1,6 @@
 .profile__plus-button{
   background-image: url('../../../images/plus.svg');
   background-repeat: no-repeat;
-  background-size: scale-down;
   background-position: center;
   padding: 14px 64px;
   box-sizing: border-box;
@@ -13,6 +12,7 @@
   align-self: center;
   transition: opacity 0.3s linear;
   background-color: inherit;
+  outline: none;
 }
 
 @media screen and (max-width: 920px) {

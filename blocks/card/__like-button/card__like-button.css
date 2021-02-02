@@ -8,6 +8,7 @@
   transition: opacity 0.3s linear;
   background-color: inherit;
   border: 0;
+  outline: none;
 }
 
 .card__like-button:hover{
