@@ -31,35 +31,17 @@ const initialCards = [
   }
 ];
 const page = document.querySelector('.page');
-// Функция заполняет копию шаблона карточки данными, передаваемыми в качестве аргументов и передает в DOM
-const cardRender = (name, link) => {
-  const cardCopy = card.cloneNode(true);
-  cardCopy.querySelector('.card__title').textContent = name;
-  cardCopy.querySelector('.card__image').alt = name;
-  cardCopy.querySelector('.card__image').src = link;
-// К каждой карточке добавляем событие для кнопки удаления, которая по клику удаляет элемент списка
-  const delButton = cardCopy.querySelector('.card__trash-button');
-  delButton.addEventListener('click', () => {
-    const deleteCard = delButton.closest('li');
-    deleteCard.remove()
-  });
-// Аналогично добавляем событие для кнопки лайк
-  const likeButton = cardCopy.querySelector('.card__like-button');
-  likeButton.addEventListener('click', () => {
-    likeButton.classList.toggle('card__like-button_active');
-  })
-  // Добавляем события для клика по картинке
-  const cardImage = cardCopy.querySelector('.card__image');
-  cardImage.addEventListener('click', () => {
-    popupRender('photo', name, link);
-    openPopup();
-  });
-  cards.prepend(cardCopy);
-}
+
+
 
 const popupWindow = document.querySelector('.popup');
 const closePopup = () => {popupWindow.classList.remove('popup_opened')};
 const openPopup = () => {popupWindow.classList.add('popup_opened')};
+// закрываем попап при клике на свободное место на странице
+popupWindow.addEventListener('click', (evt) => {
+  if (evt.currentTarget === evt.target) {closePopup()}
+});
+
 const popupContent = document.querySelector('.popup__container')
 const closeButton = popupContent.querySelector('.popup__close-button');
 closeButton.addEventListener('click', closePopup);
@@ -116,7 +98,31 @@ const popupRender = (content, photoTitle, photoLink) => {
     });
   }
 }
-
+// Функция заполняет копию шаблона карточки данными, передаваемыми в качестве аргументов и передает в DOM
+const cardRender = (name, link) => {
+  const cardCopy = card.cloneNode(true);
+  cardCopy.querySelector('.card__title').textContent = name;
+  cardCopy.querySelector('.card__image').alt = name;
+  cardCopy.querySelector('.card__image').src = link;
+// К каждой карточке добавляем событие для кнопки удаления, которая по клику удаляет элемент списка
+  const delButton = cardCopy.querySelector('.card__trash-button');
+  delButton.addEventListener('click', () => {
+    const deleteCard = delButton.closest('li');
+    deleteCard.remove()
+  });
+// Аналогично добавляем событие для кнопки лайк
+  const likeButton = cardCopy.querySelector('.card__like-button');
+  likeButton.addEventListener('click', () => {
+    likeButton.classList.toggle('card__like-button_active');
+  })
+  // Добавляем события для клика по картинке
+  const cardImage = cardCopy.querySelector('.card__image');
+  cardImage.addEventListener('click', () => {
+    popupRender('photo', name, link);
+    openPopup();
+  });
+  cards.prepend(cardCopy);
+}
 // Заполняем карточки данными из массива initialCards
 initialCards.forEach(element => {
   cardRender(element.name, element.link);
