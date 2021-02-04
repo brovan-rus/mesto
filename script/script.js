@@ -46,11 +46,21 @@ const popupContent = document.querySelector('.popup__container')
 const closeButton = popupContent.querySelector('.popup__close-button');
 closeButton.addEventListener('click', closePopup);
 const formElement = popupContent.querySelector('.popup__form');
+formElement.addEventListener('submit', formSubmit);
 const formName = formElement.querySelector('.popup__form-field_info_name');
 const formValue = formElement.querySelector('.popup__form-field_info_value');
 const formSubmitButton = formElement.querySelector('.popup__submit-button');
 const popupTitle = popupContent.querySelector('.popup__title');
 const popupImage = popupContent.querySelector('.popup__photo');
+
+function formSubmit(evt){
+  evt.preventDefault();
+  if(formSubmitButton.textContent === 'Сохранить'){
+    profileName.textContent = formName.value;
+    profileJob.textContent = formValue.value;}
+  else {cardRender(formName.value, formValue.value);}
+  closePopup();
+}
 
 //Функция изменяет классы попапа в соответствии с аргументом content)
 const popupRender = (content, photoTitle, photoLink) => {
@@ -61,43 +71,29 @@ const popupRender = (content, photoTitle, photoLink) => {
     popupImage.src = photoLink;
     popupImage.alt = photoTitle;
     popupTitle.classList.add('popup__title_content_photo');
-    popupTitle.textContent = photoTitle;
-
-  };
-  if (content === 'profileEdit') {
+    popupTitle.textContent = photoTitle;}
+  else {
     popupImage.classList.remove('popup__photo_active');
     formElement.classList.remove('popup__form_inactive');
     popupTitle.classList.remove('popup__title_content_photo');
     popupContent.classList.add('popup__container_content_form')
+  }
+
+  if (content === 'profileEdit') {
     formName.value = profileName.textContent;
     formValue.value = profileJob.textContent;
     formSubmitButton.textContent = 'Сохранить';
-    popupTitle.textContent = 'Редактировать профиль';
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      profileName.textContent = formName.value;
-      profileJob.textContent = formValue.value;
-      closePopup();
-    });
-  }
+    popupTitle.textContent = 'Редактировать профиль';}
+
   if (content === 'cardAdd') {
-    popupImage.classList.remove('popup__photo_active');
-    formElement.classList.remove('popup__form_inactive');
-    popupTitle.classList.remove('popup__title_content_photo');
-    popupContent.classList.add('popup__container_content_form');
-    formName.value = 'Название';
-    formValue.value = 'Ссылка на картинку';
+    formName.value = '';
+    formValue.value = '';
+    formName.placeholder = 'Название';
+    formValue.placeholder = 'Ссылка на картинку';
     formSubmitButton.textContent = 'Создать';
-    popupTitle.textContent = 'Новое место';
-    const placeName = formElement.querySelector('.popup__form-field_info_name');
-    const photoLink = formElement.querySelector('.popup__form-field_info_value');
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      cardRender(placeName.value, photoLink.value);
-      closePopup();
-    });
-  }
+    popupTitle.textContent = 'Новое место';}
 }
+
 // Функция заполняет копию шаблона карточки данными, передаваемыми в качестве аргументов и передает в DOM
 const cardRender = (name, link) => {
   const cardCopy = card.cloneNode(true);
