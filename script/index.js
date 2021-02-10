@@ -1,35 +1,6 @@
-// Данный в задании массив значений для карточек
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 // Объявлявление переменных
 
-// Объявляем ссылки на окна части документа
-const popupWindow = document.querySelector('.popup');
-
+// Объявляем ссылки элементы документа
 const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
 const popupCardAdd = document.querySelector('.popup_content_card-add');
 const popupPhoto = document.querySelector('.popup_content_photo');
@@ -46,14 +17,12 @@ const cardTemplate = document.querySelector('#card').content;
 const profileEditCloseButton = popupProfileEdit.querySelector('.popup__close-button');
 const formProfileName = popupProfileEdit.querySelector('.popup__form-field_info_name');
 const formProfileJob = popupProfileEdit.querySelector('.popup__form-field_info_value');
-const profileEditSubmitButton = popupProfileEdit.querySelector('.popup__submit-button');
 const profileEditFormElement = popupProfileEdit.querySelector('.popup__form');
 
 // Объявляем ссылки на элементы popupCardAdd
 const cardAddCloseButton = popupCardAdd.querySelector('.popup__close-button');
 const cardName = popupCardAdd.querySelector('.popup__form-field_info_name');
 const cardLink = popupCardAdd.querySelector('.popup__form-field_info_value');
-const cardAddSubmitButton = popupCardAdd.querySelector('.popup__submit-button');
 const cardAddFormElement = popupCardAdd.querySelector('.popup__form');
 
 // Объявляем ссылки на элемнеты popupPhoto
@@ -72,6 +41,7 @@ let cardData = {title: '', link: ''}
 function closePopup(popup) {popup.classList.remove('popup_opened');}
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  // Закрываем попап при клике на свободное место на странице
   popup.addEventListener('click', (evt) => {if (evt.currentTarget === evt.target) {closePopup(popup)}})
 }
 
@@ -136,15 +106,6 @@ profileEditFormElement.addEventListener('submit', handleProfileEdit);
 // Добавляем обработчики кнопок "Редактировать профиль" и "Добавление карточки"
 profileEditButton.addEventListener('click', handleProfileEditOpen);
 CardAddButton.addEventListener('click', handleCardAddOpen);
-
-// Закрываем попап при клике на свободное место на странице
-popupWindow.addEventListener('click', (evt) => {
-  if (evt.currentTarget === evt.target) {
-    closePopup(popupPhoto);
-    closePopup(popupProfileEdit);
-    closePopup(popupCardAdd);
-  }
-});
 
 // Заполняем карточки данными из массива initialCards
 initialCards.forEach(element => {renderCard(element, cardsList);});
