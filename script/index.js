@@ -33,9 +33,6 @@ const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo')
 // Объявляем переменную для хранения данных карточки
 let cardData = {title: '', link: ''}
 
-// const popupContent = document.querySelector('.popup__container')
-// const formElement = popupContent.querySelector('.popup__form');
-
 // Объявляем функции
 // Функции открытия и закрытия попапа
 function closePopup(popup) {popup.classList.remove('popup_opened');}
