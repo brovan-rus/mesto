@@ -1,13 +1,23 @@
 .form__input-error{
-  margin: 0;
-  padding: 5px 0 0 0;
+  padding-top: 5px;
+  display: block;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 15px;
   color: #FF0000;
-  visibility: hidden;
   opacity: 0;
-  transition: visibility 0.3s, opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+  margin-bottom: 13px;
+}
+
+.form__input-error:last-of-type{
+  margin-bottom: 31px;
+}
+
+@media screen and (max-width: 520px){
+  .form__input-error:last-of-type{
+    margin-bottom: 28px;
+  }
 }

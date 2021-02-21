@@ -12,15 +12,12 @@ const cardsList = document.querySelector('.cards__list');
 // Объявляем ссылку на template
 const cardTemplate = document.querySelector('#card').content;
 
-// Объявляем элементы формы profileForm
-
-const profileForm = document.forms.profile;
+// Объявляем элементы форм
+const forms = document.forms;
+const profileForm = forms.profile;
 const profileNameInput = profileForm.elements.name;
 const profileJobInput = profileForm.elements.job;
-
-// Объявляем элементы формы cardAddForm
-
-const cardAddForm = document.forms.card;
+const cardAddForm = forms.card;
 const cardNameInput = cardAddForm.elements.name;
 const cardLinkInput = cardAddForm.elements.link;
 
