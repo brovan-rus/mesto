@@ -28,8 +28,6 @@ const cardLinkInput = cardAddForm.elements.link;
 const popupPhotoImage = popupPhoto.querySelector('.popup__photo');
 const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo')
 
-
-
 // Объявляем функции
 // Функции открытия и закрытия попапа
 function closePopup(popup) {

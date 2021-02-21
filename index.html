@@ -46,8 +46,10 @@
         <button type="button" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="profile" class="form">
-          <input class="form__input form__input_info_name" type="text" name="name" placeholder="Имя">
-          <input class="form__input form__input_info_value" type="text" name="job" placeholder="О себе">
+          <input class="form__input form__input_info_name" autocomplete="off" id="profile-name-input" type="text" name="name" placeholder="Имя">
+          <span class="form__input-error profile-name-input-error"></span>
+          <input class="form__input form__input_info_value" autocomplete="off" id="profile-job-input" type="text" name="job" placeholder="О себе">
+          <span class="form__input-error profile-job-input-error"></span>
           <button class="form__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
@@ -66,8 +68,10 @@
             <button type="button" class="popup__close-button"></button>
             <h2 class="popup__title">Новое место</h2>
             <form name="card" class="form">
-              <input class="form__input form__input_info_name" type="text" name="name" placeholder="Название">
-              <input class="form__input form__input_info_value" type="text" name="link" placeholder="Ссылка на картинку">
+              <input class="form__input form__input_info_name" id="card-title-input"  autocomplete="off" type="text" name="name" placeholder="Название">
+              <span class="form__input-error card-title-input-error"></span>
+              <input class="form__input form__input_info_value" autocomplete="off" id="card-link-input" type="text" name="link" placeholder="Ссылка на картинку">
+              <span class="form__input-error card-link-input-error"></span>
               <button class="form__submit-button" type="submit">Создать</button>
             </form>
           </div>
@@ -86,6 +90,5 @@
         </div>
       </li>
   </template>
-
 </body>
 </html>
