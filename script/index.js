@@ -18,15 +18,15 @@ const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card').content;
 // Объявляем ссылки на элементы popupProfileEdit
 const profileEditCloseButton = popupProfileEdit.querySelector('.popup__close-button');
-const formProfileName = popupProfileEdit.querySelector('.popup__form-field_info_name');
-const formProfileJob = popupProfileEdit.querySelector('.popup__form-field_info_value');
-const profileEditFormElement = popupProfileEdit.querySelector('.popup__form');
+const formProfileName = popupProfileEdit.querySelector('.form__input_info_name');
+const formProfileJob = popupProfileEdit.querySelector('.form__input_info_value');
+const profileEditFormElement = popupProfileEdit.querySelector('.form');
 
 // Объявляем ссылки на элементы popupCardAdd
 const cardAddCloseButton = popupCardAdd.querySelector('.popup__close-button');
-const cardName = popupCardAdd.querySelector('.popup__form-field_info_name');
-const cardLink = popupCardAdd.querySelector('.popup__form-field_info_value');
-const cardAddFormElement = popupCardAdd.querySelector('.popup__form');
+const cardName = popupCardAdd.querySelector('.form__input_info_name');
+const cardLink = popupCardAdd.querySelector('.form__input_info_value');
+const cardAddFormElement = popupCardAdd.querySelector('.form');
 
 // Объявляем ссылки на элемнеты popupPhoto
 const popupPhotoCloseButton = popupPhoto.querySelector('.popup__close-button');

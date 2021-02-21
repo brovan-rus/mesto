@@ -11,6 +11,7 @@
   <title>Mesto. Russia.</title>
   <script defer src="script/initial-cards.js"></script>
   <script defer src="script/index.js"></script>
+  <script dever src="script/validation.js"></script>
 </head>
 <body>
   <div class="page page_position_center">
@@ -44,10 +45,10 @@
       <div class="popup__container popup__container_content_form">
         <button type="button" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="popup-form" class="popup__form">
-          <input class="popup__form-field popup__form-field_info_name" type="text" name="profile-name" placeholder="Имя">
-          <input class="popup__form-field popup__form-field_info_value" type="text" name="profile-job" placeholder="О себе">
-          <button class="popup__submit-button" type="submit">Сохранить</button>
+        <form name="popup-form" class="form">
+          <input class="form__input form__input_info_name" type="text" name="profile-name" placeholder="Имя">
+          <input class="form__input form__input_info_value" type="text" name="profile-job" placeholder="О себе">
+          <button class="form__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -64,10 +65,10 @@
           <div class="popup__container popup__container_content_form">
             <button type="button" class="popup__close-button"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form name="popup-form" class="popup__form">
-              <input class="popup__form-field popup__form-field_info_name" type="text" name="profile-name" placeholder="Название">
-              <input class="popup__form-field popup__form-field_info_value" type="text" name="profile-job" placeholder="Ссылка на картинку">
-              <button class="popup__submit-button" type="submit">Создать</button>
+            <form name="popup-form" class="form">
+              <input class="form__input form__input_info_name" type="text" name="profile-name" placeholder="Название">
+              <input class="form__input form__input_info_value" type="text" name="profile-job" placeholder="Ссылка на картинку">
+              <button class="form__submit-button" type="submit">Создать</button>
             </form>
           </div>
         </div>
