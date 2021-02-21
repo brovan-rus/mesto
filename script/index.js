@@ -1,14 +1,23 @@
 // Объявлявление переменных
 // Объявляем ссылки элементы документа
+
+const popups = document.querySelectorAll('.popup');
+
+console.log (Array.from(popups));
+
+
+
 const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
-// Добавляем обработчик закрытия по overlay
-popupProfileEdit.addEventListener('click', (evt) => {if (evt.currentTarget === evt.target){closePopup(popupProfileEdit);}});
 const popupCardAdd = document.querySelector('.popup_content_card-add');
-// Добавляем обработчик закрытия по overlay
-popupCardAdd.addEventListener('click', (evt) => {if (evt.currentTarget === evt.target){closePopup(popupCardAdd);}});
 const popupPhoto = document.querySelector('.popup_content_photo');
-// Добавляем обработчик закрытия по overlay
+
+
+
+/*// Добавляем обработчики закрытия по overlay
 popupPhoto.addEventListener('click', (evt) => {if (evt.currentTarget === evt.target){closePopup(popupPhoto);}});
+popupCardAdd.addEventListener('click', (evt) => {if (evt.currentTarget === evt.target){closePopup(popupCardAdd);}});
+popupProfileEdit.addEventListener('click', (evt) => {if (evt.currentTarget === evt.target){closePopup(popupProfileEdit);}});*/
+
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -32,6 +41,8 @@ const cardAddFormElement = popupCardAdd.querySelector('.form');
 const popupPhotoCloseButton = popupPhoto.querySelector('.popup__close-button');
 const popupPhotoImage = popupPhoto.querySelector('.popup__photo');
 const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo')
+
+
 
 // Объявляем функции
 // Функции открытия и закрытия попапа
@@ -98,7 +109,13 @@ function handleCardAddOpen() {
   openPopup(popupCardAdd);
 }
 
-//Обработчики кнопок закрытия попапов
+//Обработчики событый
+Array.from(popups).forEach((popup) => {
+  popup.addEventListener('click', (evt) => {if (evt.currentTarget === evt.target) {closePopup(popup)}});
+  popup.addEventListener('keydown', (evt) => {if (evt.key === 'Escape') {closePopup(popup)}});
+})
+
+
 cardAddCloseButton.addEventListener('click', () => closePopup(popupCardAdd));
 profileEditCloseButton.addEventListener('click', () => closePopup(popupProfileEdit));
 popupPhotoCloseButton.addEventListener('click', () => closePopup(popupPhoto));
