@@ -1,4 +1,4 @@
-.form__submit-button_type_error{
+.form__submit-button_disabled{
   background-color: #fff;
   border: 1px solid #000000;
   border-radius: 2px;
@@ -7,11 +7,11 @@
   transition: all 0.3s linear;
 }
 
-.form__submit-button_type_error:hover{
+.form__submit-button_disabled:hover{
   opacity: .2;
   cursor: default;
 }
 
-.form__submit-button_type_error:active{
+.form__submit-button_disabled:active{
   opacity: .2;
 }

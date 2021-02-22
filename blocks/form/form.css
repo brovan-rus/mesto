@@ -1,3 +1,5 @@
 .form{
   display: block;
+  box-sizing: border-box;
+
 }

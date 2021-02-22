@@ -20,6 +20,8 @@ const profileJobInput = profileForm.elements.job;
 const cardAddForm = forms.card;
 const cardNameInput = cardAddForm.elements.name;
 const cardLinkInput = cardAddForm.elements.link;
+profileNameInput.value = profileName.textContent;
+profileJobInput.value = profileJob.textContent;
 
 // Объявляем ссылки на элемнеты popupPhoto
 const popupPhotoImage = popupPhoto.querySelector('.popup__photo');
