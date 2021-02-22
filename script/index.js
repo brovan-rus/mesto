@@ -32,11 +32,13 @@ const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo')
 // Функции открытия и закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  removePopupEventListeners(popup);
 }
 
 function closePopupWithForm(popup){
   closePopup(popup);
   resetForm(popup);
+  removePopupEventListeners(popup);
 }
 
 function resetForm(popup) {
@@ -50,6 +52,7 @@ function resetForm(popup) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  addPopupEventListeners(popup);
 }
 
 // Функция для обработки кнопок отправки формы
@@ -123,23 +126,34 @@ function handleCardAddOpen() {
 
 //Обработчики событый
 //Обработчики событий попапов
-function addPopupEventListeners() {
-  Array.from(popups).forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
-      if (evt.currentTarget === evt.target) {
-        closePopup(popup)
-      }
-    });
-    popup.addEventListener('keydown', (evt) => {
-      if (evt.key === 'Escape') {
-        closePopup(popup)
-      }
-    });
-    popup.querySelector('.popup__close-button').addEventListener('click', () => closePopup(popup));
-  })
+
+function closeOnEscape(evt){
+  if (evt.key === 'Escape') {closePopup(evt.currentTarget);}
 }
 
-addPopupEventListeners();
+function closeOnOverlay(evt){
+  if (evt.currentTarget === evt.target) {closePopup(evt.currentTarget);}
+}
+
+function handleClosePopupButton(evt){
+  if (evt.target.classList.contains('popup__close-button')){
+    closePopup(evt.currentTarget);
+  }
+}
+
+function addPopupEventListeners(popup) {
+  popup.addEventListener('keydown', closeOnEscape);
+  popup.addEventListener('click', closeOnOverlay);
+  popup.addEventListener('click', handleClosePopupButton);
+}
+
+function removePopupEventListeners(popup) {
+  popup.removeEventListener('keydown', closeOnEscape);
+  popup.removeEventListener('click', closeOnOverlay);
+  popup.removeEventListener('click', handleClosePopupButton);
+}
+
+
 
 // Обрабочики событий отправки форм
 cardAddForm.addEventListener('submit', handleCardAdd);
