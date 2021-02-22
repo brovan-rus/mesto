@@ -2,7 +2,6 @@
   min-height: 30px;
   display: block;
   padding-top: 5px;
-  display: block;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -10,7 +9,6 @@
   line-height: 15px;
   color: #FF0000;
   opacity: 0;
-  transition: opacity 0.3s linear;
   transition: opacity 0.3s linear;
   visibility: hidden;
   margin-bottom: 13px;
