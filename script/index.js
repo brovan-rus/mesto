@@ -39,8 +39,7 @@ const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo')
 // Функции открытия и закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  resetForm(popup);
-}
+  }
 
 function resetForm(popup){
   const popupForm = popup.querySelector('.form');
@@ -66,8 +65,8 @@ function handleProfileEdit(evt) {
 function handleCardAdd(evt) {
   evt.preventDefault();
   // Объявляем переменную для хранения данных карточки
-  const cardData = {title: '', link: ''}
-  cardData.title = cardNameInput.value;
+  const cardData = {name: '', link: ''}
+  cardData.name = cardNameInput.value;
   cardData.link = cardLinkInput.value;
   renderCard(cardData, cardsList);
   evt.target.reset();
@@ -88,10 +87,10 @@ function handlePreviewPicture(data) {
 // Функция создания карточки из template
 function createCard(cardData){
   const cardCopy = cardTemplate.cloneNode('true');
-  cardCopy.querySelector('.card__title').textContent = cardData.title;
+  cardCopy.querySelector('.card__title').textContent = cardData.name;
   const cardImage = cardCopy.querySelector('.card__image');
   cardImage.src = cardData.link;
-  cardImage.alt = cardData.title;
+  cardImage.alt = cardData.name;
   cardImage.addEventListener('click', () => handlePreviewPicture(cardData));
   const delButton = cardCopy.querySelector('.card__trash-button');
   delButton.addEventListener('click', handleDeleteCard);
