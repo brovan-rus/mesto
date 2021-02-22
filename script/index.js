@@ -1,4 +1,12 @@
 // Объявлявление переменных
+const validationValues = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'};
+
 // Объявляем ссылки элементы документа
 const popups = document.querySelectorAll('.popup');
 const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
@@ -31,7 +39,18 @@ const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo')
 // Функции открытия и закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  resetForm(popup);
 }
+
+function resetForm(popup){
+  const popupForm = popup.querySelector('.form');
+  const inputList = Array.from(popupForm.querySelectorAll(validationValues.inputSelector));
+  inputList.forEach((element) => {
+    hideInputError(popupForm, element, validationValues.errorClass, validationValues.inputErrorClass);
+  });
+  popupForm.reset();
+}
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   // Закрываем попап при клике на свободное место на странице
@@ -89,6 +108,8 @@ function handleProfileEditOpen() {
   openPopup(popupProfileEdit);
 }
 function handleCardAddOpen() {
+  cardNameInput.value='';
+  cardLinkInput.value='';
   openPopup(popupCardAdd);
 }
 
