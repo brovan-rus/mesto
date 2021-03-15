@@ -1,4 +1,4 @@
-import {initialCards} from './initial-cards.js';
+import {initialCards, validationValues} from './initilize.js';
 import {Card} from './card.js';
 import {Popup} from "./popup.js";
 
@@ -13,8 +13,6 @@ const profileJob = document.querySelector('.profile__job');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const cardAddButton = document.querySelector('.profile__plus-button');
 const cardsList = document.querySelector('.cards__list');
-// Объявляем ссылку на template
-const cardTemplate = document.querySelector('#card').content;
 
 // Объявляем элементы форм
 const forms = document.forms;
@@ -24,10 +22,8 @@ const profileJobInput = profileForm.elements.job;
 const cardAddForm = forms.card;
 const cardNameInput = cardAddForm.elements.name;
 const cardLinkInput = cardAddForm.elements.link;
-
 profileNameInput.value = profileName.textContent;
 profileJobInput.value = profileJob.textContent;
-
 
 // Функция для обработки кнопок отправки формы
 function handleProfileEdit(evt) {
@@ -60,15 +56,13 @@ function handleProfileEditOpen() {
 }
 
 function handleCardAddOpen() {
-  toggleSubmitButton(cardAddForm, validationValues.submitButtonSelector, validationValues.inactiveButtonClass);
+  //toggleSubmitButton(cardAddForm, validationValues.submitButtonSelector, validationValues.inactiveButtonClass);
   popupCardAdd.openPopup();
 }
-
 
 // Обрабочики событий отправки форм
 cardAddForm.addEventListener('submit', handleCardAdd);
 profileForm.addEventListener('submit', handleProfileEdit);
-
 // Добавляем обработчики кнопок "Редактировать профиль" и "Добавление карточки"
 profileEditButton.addEventListener('click', handleProfileEditOpen);
 cardAddButton.addEventListener('click', handleCardAddOpen);
@@ -77,3 +71,4 @@ cardAddButton.addEventListener('click', handleCardAddOpen);
 initialCards.forEach(element => {
   renderCard(element, cardsList);
 });
+

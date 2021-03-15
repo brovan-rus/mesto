@@ -2,8 +2,8 @@ import {Popup} from './popup.js';
 
 export class Card {
   constructor(data, templateSelector) {
-    this._data=data;
-    this._templateSelector=templateSelector;
+    this._data = data;
+    this._templateSelector = templateSelector;
   }
 
   // Публичный метод создания карточки.
@@ -14,14 +14,14 @@ export class Card {
       .cloneNode('true');
     _cardTemplate.querySelector('.card__title').textContent = this._data.name;
     const _cardImage = _cardTemplate.querySelector('.card__image');
-    _cardImage.src=this._data.link;
-    _cardImage.alt=this._data.name;
+    _cardImage.src = this._data.link;
+    _cardImage.alt = this._data.name;
     this._addCardListeners(_cardTemplate, _cardImage);
     return _cardTemplate;
   }
 
   // Метод лайка карточки
-   _handleLikeCard(evt) {
+  _handleLikeCard(evt) {
     evt.target.classList.toggle('card__like-button_active');
   }
 

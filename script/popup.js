@@ -1,19 +1,25 @@
+import {FormValidator} from './formValidator.js';
+import {validationValues} from './initilize.js';
+
 export class Popup {
   constructor(popup) {
     this._popup = popup;
+    this._form = popup.querySelector('.form');
+    if (this._form) {
+      this._formValidator = new FormValidator(validationValues, this._form)
+    }
   }
 
   openPopup() {
     this._popup.classList.add('popup_opened');
     this._addPopupEventListeners();
+    if (this._form) {
+      this._formValidator.enableValidation()
+    }
   }
 
   _resetForm() {
     const _popupForm = this._popup.querySelector('.form');
-    const _inputList = Array.from(_popupForm.querySelectorAll(validationValues.inputSelector));
-    _inputList.forEach((element) => {
-      hideInputError(_popupForm, element, validationValues.errorClass, validationValues.inputErrorClass);
-    });
     _popupForm.reset();
   }
 
@@ -21,7 +27,9 @@ export class Popup {
     this._popup.classList.remove('popup_opened');
     this._removePopupEventListeners();
     // Если в попапе есть форма - сбросим ее при закрытии окна.
-    if (this._popup.querySelector('.form')) {this._resetForm();}
+    if (this._popup.querySelector('.form')) {
+      this._resetForm();
+    }
   }
 
   _handleClosePopupButton(evt) {
@@ -30,7 +38,7 @@ export class Popup {
     }
   }
 
-   _closeOnOverlay(evt) {
+  _closeOnOverlay(evt) {
     if (evt.currentTarget === evt.target) {
       this.closePopup();
     }
