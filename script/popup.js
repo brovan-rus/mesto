@@ -8,6 +8,7 @@ export class Popup {
     if (this._form) {
       this._formValidator = new FormValidator(validationValues, this._form)
     }
+    this._closeOnEscape = this._closeOnEscape.bind(this);
   }
 
   openPopup() {
@@ -51,13 +52,13 @@ export class Popup {
   }
 
   _addPopupEventListeners() {
-    this._popup.addEventListener('keydown', (evt) => this._closeOnEscape(evt));
+    this._popup.closest('body').addEventListener('keydown', this._closeOnEscape);
     this._popup.addEventListener('click', (evt) => this._closeOnOverlay(evt));
     this._popup.addEventListener('click', (evt) => this._handleClosePopupButton(evt));
   }
 
   _removePopupEventListeners() {
-    this._popup.removeEventListener('keydown', this._closeOnEscape);
+    this._popup.closest('body').removeEventListener('keydown', this._closeOnEscape);
     this._popup.removeEventListener('click', this._closeOnOverlay);
     this._popup.removeEventListener('click', this._handleClosePopupButton);
   }
