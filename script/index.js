@@ -1,11 +1,10 @@
-import {initialCards, validationValues} from './initilize.js';
+import {initialCards, templateSelector} from './initilize.js';
 import {Card} from './card.js';
-import {Popup} from "./popup.js";
+import {openPopup, closePopup} from './utils.js';
 
-// Объявлявление переменных
-const popupProfileEdit = new Popup(document.querySelector('.popup_content_profile-edit'));
-const popupCardAdd = new Popup(document.querySelector('.popup_content_card-add'));
-const templateSelector = '#card';
+// Объявляем ссылки на элементы popup
+const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
+const popupCardAdd = document.querySelector('.popup_content_card-add');
 
 // Объявляем ссылки элементы документа
 const profileName = document.querySelector('.profile__name');
@@ -30,7 +29,7 @@ function handleProfileEdit(evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
-  popupProfileEdit.closePopup();
+  closePopup(popupProfileEdit);
 }
 
 function handleCardAdd(evt) {
@@ -40,7 +39,7 @@ function handleCardAdd(evt) {
   cardData.name = cardNameInput.value;
   cardData.link = cardLinkInput.value;
   renderCard(cardData, cardsList);
-  popupCardAdd.closePopup();
+  closePopup(popupCardAdd);
 }
 
 // Функция добавления карточки в разметку
@@ -52,12 +51,12 @@ function renderCard(data, wrap) {
 function handleProfileEditOpen() {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
-  popupProfileEdit.openPopup();
+  openPopup(popupProfileEdit);
 }
 
 function handleCardAddOpen() {
   //toggleSubmitButton(cardAddForm, validationValues.submitButtonSelector, validationValues.inactiveButtonClass);
-  popupCardAdd.openPopup();
+  openPopup(popupCardAdd);
 }
 
 // Обрабочики событий отправки форм
@@ -71,4 +70,3 @@ cardAddButton.addEventListener('click', handleCardAddOpen);
 initialCards.forEach(element => {
   renderCard(element, cardsList);
 });
-
