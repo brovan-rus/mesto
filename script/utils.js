@@ -7,10 +7,10 @@ export function openPopup(popup) {
   popup.classList.add('popup_opened');
   addPopupEventListeners(popup);
   // Если в попапе есть форма - включим валидацию при открытии окна.
-  const popupForm = popup.querySelector('.form');
-  if (popupForm) {
-    new FormValidator(validationValues, popupForm).enableValidation();
-  }
+  // const popupForm = popup.querySelector('.form');
+  // if (popupForm) {
+  //   new FormValidator(validationValues, popupForm).enableValidation();
+  // }
 }
 
 export function closePopup(popup) {
