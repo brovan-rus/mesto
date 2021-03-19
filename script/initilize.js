@@ -34,3 +34,6 @@ export const validationValues = {
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
 };
+
+export const templateSelector = '#card';
+export const closeKey = 'Escape';

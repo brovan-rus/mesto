@@ -1,4 +1,4 @@
-import {Popup} from './popup.js';
+import {openPopup} from './utils.js';
 
 export class Card {
   constructor(data, templateSelector) {
@@ -33,13 +33,12 @@ export class Card {
   _handlePreviewPicture(data) {
     const _popupPhoto = document.querySelector('.popup_content_photo');
     const _popupPhotoImage = _popupPhoto.querySelector('.popup__photo');
-    const _popupPhotoTitle = _popupPhoto.querySelector('.popup__title_content_photo')
+    const _popupPhotoTitle = _popupPhoto.querySelector('.popup__title_content_photo');
     _popupPhotoImage.src = data.link;
     _popupPhotoImage.alt = data.name;
     _popupPhotoTitle.textContent = data.name;
-    new Popup(_popupPhoto).openPopup();
+    openPopup(_popupPhoto);
   }
-
 
   // Добавление слушателей
   _addCardListeners(cardTemplate, cardImage) {
