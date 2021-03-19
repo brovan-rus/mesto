@@ -1,6 +1,7 @@
-import {initialCards, templateSelector} from './initilize.js';
+import {initialCards, templateSelector, validationValues} from './initilize.js';
 import {Card} from './card.js';
 import {openPopup, closePopup} from './utils.js';
+import {FormValidator} from "./formValidator.js";
 
 // Объявляем ссылки на элементы popup
 const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
@@ -23,6 +24,12 @@ const cardNameInput = cardAddForm.elements.name;
 const cardLinkInput = cardAddForm.elements.link;
 profileNameInput.value = profileName.textContent;
 profileJobInput.value = profileJob.textContent;
+
+// Создаём экземпляры класса formValidator
+const profileFormValidator = new FormValidator(validationValues, profileForm);
+const cardAddFormValidator = new FormValidator(validationValues, cardAddForm);
+profileFormValidator.enableValidation();
+cardAddFormValidator.enableValidation();
 
 // Функция для обработки кнопок отправки формы
 function handleProfileEdit(evt) {
@@ -51,11 +58,12 @@ function renderCard(data, wrap) {
 function handleProfileEditOpen() {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
+  profileFormValidator.clearValidation();
   openPopup(popupProfileEdit);
 }
 
 function handleCardAddOpen() {
-  //toggleSubmitButton(cardAddForm, validationValues.submitButtonSelector, validationValues.inactiveButtonClass);
+  cardAddFormValidator.clearValidation();
   openPopup(popupCardAdd);
 }
 
