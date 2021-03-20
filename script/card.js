@@ -1,4 +1,5 @@
 import {openPopup} from './utils.js';
+import {popupPhoto, popupPhotoImage, popupPhotoTitle} from "./constants.js";
 
 export class Card {
   constructor(data, templateSelector) {
@@ -8,16 +9,16 @@ export class Card {
 
   // Публичный метод создания карточки.
   create() {
-    const _cardTemplate = document
+    const cardTemplate = document
       .querySelector(this._templateSelector)
       .content
       .cloneNode('true');
-    _cardTemplate.querySelector('.card__title').textContent = this._data.name;
-    const _cardImage = _cardTemplate.querySelector('.card__image');
-    _cardImage.src = this._data.link;
-    _cardImage.alt = this._data.name;
-    this._addCardListeners(_cardTemplate, _cardImage);
-    return _cardTemplate;
+    cardTemplate.querySelector('.card__title').textContent = this._data.name;
+    const cardImage = cardTemplate.querySelector('.card__image');
+    cardImage.src = this._data.link;
+    cardImage.alt = this._data.name;
+    this._addCardListeners(cardTemplate, cardImage);
+    return cardTemplate;
   }
 
   // Метод лайка карточки
@@ -31,22 +32,19 @@ export class Card {
   }
 
   _handlePreviewPicture(data) {
-    const _popupPhoto = document.querySelector('.popup_content_photo');
-    const _popupPhotoImage = _popupPhoto.querySelector('.popup__photo');
-    const _popupPhotoTitle = _popupPhoto.querySelector('.popup__title_content_photo');
-    _popupPhotoImage.src = data.link;
-    _popupPhotoImage.alt = data.name;
-    _popupPhotoTitle.textContent = data.name;
-    openPopup(_popupPhoto);
+    popupPhotoImage.src = data.link;
+    popupPhotoImage.alt = data.name;
+    popupPhotoTitle.textContent = data.name;
+    openPopup(popupPhoto);
   }
 
   // Добавление слушателей
   _addCardListeners(cardTemplate, cardImage) {
     cardImage.addEventListener('click', () => this._handlePreviewPicture(this._data));
-    const _delButton = cardTemplate.querySelector('.card__trash-button');
-    _delButton.addEventListener('click', this._handleDeleteCard);
-    const _likeButton = cardTemplate.querySelector('.card__like-button');
-    _likeButton.addEventListener('click', this._handleLikeCard);
+    const delButton = cardTemplate.querySelector('.card__trash-button');
+    delButton.addEventListener('click', this._handleDeleteCard);
+    const likeButton = cardTemplate.querySelector('.card__like-button');
+    likeButton.addEventListener('click', this._handleLikeCard);
   }
 
 }

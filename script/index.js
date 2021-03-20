@@ -1,21 +1,12 @@
-import {initialCards, templateSelector, validationValues} from './initilize.js';
+import {
+  initialCards, templateSelector, validationValues, popupProfileEdit,
+  popupCardAdd, profileName, profileJob, profileEditButton, cardAddButton, cardsList, forms
+} from './constants.js';
 import {Card} from './card.js';
-import {openPopup, closePopup} from './utils.js';
+import {openPopup, closePopupWithForm} from './utils.js';
 import {FormValidator} from "./formValidator.js";
 
-// Объявляем ссылки на элементы popup
-const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
-const popupCardAdd = document.querySelector('.popup_content_card-add');
-
-// Объявляем ссылки элементы документа
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-const profileEditButton = document.querySelector('.profile__edit-button');
-const cardAddButton = document.querySelector('.profile__plus-button');
-const cardsList = document.querySelector('.cards__list');
-
-// Объявляем элементы форм
-const forms = document.forms;
+// Объявление элементов форм
 const profileForm = forms.profile;
 const profileNameInput = profileForm.elements.name;
 const profileJobInput = profileForm.elements.job;
@@ -36,7 +27,7 @@ function handleProfileEdit(evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
-  closePopup(popupProfileEdit);
+  closePopupWithForm(popupProfileEdit);
 }
 
 function handleCardAdd(evt) {
@@ -46,12 +37,17 @@ function handleCardAdd(evt) {
   cardData.name = cardNameInput.value;
   cardData.link = cardLinkInput.value;
   renderCard(cardData, cardsList);
-  closePopup(popupCardAdd);
+  closePopupWithForm(popupCardAdd);
+}
+
+// Функция создания карточки
+function createCard(data, templateSelector) {
+  return new Card(data, templateSelector).create();
 }
 
 // Функция добавления карточки в разметку
 function renderCard(data, wrap) {
-  wrap.prepend(new Card(data, templateSelector).create());
+  wrap.prepend(createCard(data, templateSelector));
 }
 
 //Функции обработчики кнопок открытия попапов с формами

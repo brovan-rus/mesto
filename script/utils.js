@@ -1,45 +1,60 @@
-import {FormValidator} from "./formValidator.js";
-import {closeKey, validationValues} from "./initilize.js";
+import {closeKey} from "./constants.js";
 
 // Функции открытия и закрытия попапа
 
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
   addPopupEventListeners(popup);
-  // Если в попапе есть форма - включим валидацию при открытии окна.
-  // const popupForm = popup.querySelector('.form');
-  // if (popupForm) {
-  //   new FormValidator(validationValues, popupForm).enableValidation();
-  // }
 }
 
 export function closePopup(popup) {
   popup.classList.remove('popup_opened');
   removePopupEventListeners(popup);
   // Если в попапе есть форма - сбросим форму при закрытии окна.
+  // const popupForm = popup.querySelector('.form');
+  // if (popupForm) {
+  //   popupForm.reset();
+  // }
+}
+
+export function closePopupWithForm(popup) {
+  closePopup(popup);
   const popupForm = popup.querySelector('.form');
-  if (popupForm) {
-    popupForm.reset();
-  }
+  popupForm.reset();
 }
 
 function handleClosePopupButton(evt) {
   if (evt.target.classList.contains('popup__close-button')) {
-    closePopup(evt.currentTarget);
+    // Если попап с формой - вызывается функция закрытия попапа с формой.
+    if (evt.currentTarget.querySelector('.form')) {
+      closePopupWithForm(evt.currentTarget);
+    } else {
+      closePopup(evt.currentTarget);
+    }
   }
 }
 
 function closeOnOverlay(evt) {
   if (evt.currentTarget === evt.target) {
-    closePopup(evt.currentTarget);
+    // Если попап с формой - вызывается функция закрытия попапа с формой.
+    if (evt.currentTarget.querySelector('.form')) {
+      closePopupWithForm(evt.currentTarget);
+    } else {
+      closePopup(evt.currentTarget);
+    }
   }
 }
 
 function closeOnEscape(evt) {
   // ищем отрытый попап и закрываем его
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === closeKey) {
-    closePopup(openedPopup);
+    const openedPopup = document.querySelector('.popup_opened');
+    // Если попап с формой - вызывается функция закрытия попапа с формой.
+    if (openedPopup.querySelector('.form')) {
+      closePopupWithForm(openedPopup);
+    } else {
+      closePopup(openedPopup);
+    }
   }
 }
 
