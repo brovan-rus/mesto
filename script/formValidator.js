@@ -24,35 +24,33 @@ export class FormValidator {
 
 
   _toggleSubmitButton(form, submitButtonSelector, inactiveButtonClass) {
-    const _submitButton = form.querySelector(submitButtonSelector);
+    const submitButton = form.querySelector(submitButtonSelector);
     if (Array.from(form.elements).some((element) => this._isInvalid(element))) {
-      _submitButton.classList.add(inactiveButtonClass);
-      _submitButton.setAttribute('disabled', true);
+      submitButton.classList.add(inactiveButtonClass);
+      submitButton.setAttribute('disabled', true);
     } else {
-      _submitButton.classList.remove(inactiveButtonClass);
-      _submitButton.removeAttribute('disabled');
+      submitButton.classList.remove(inactiveButtonClass);
+      submitButton.removeAttribute('disabled');
     }
   }
 
   _setEventListeners() {
     const formInputElements = this._form.querySelectorAll(this._values.inputSelector);
-    //this._toggleSubmitButton(this._form, submitButtonSelector, inactiveButtonClass);
     Array.from(formInputElements).forEach((element) => {
       element.addEventListener('input', () => {
+        this._toggleSubmitButton(this._form, this._values.submitButtonSelector, this._values.inactiveButtonClass);
         if (this._isInvalid(element)) {
           this._showInputError(this._form, element, element.validationMessage, this._values.errorClass, this._values.inputErrorClass);
-          this._toggleSubmitButton(this._form, this._values.submitButtonSelector, this._values.inactiveButtonClass)
         } else {
           this._hideInputError(this._form, element, this._values.errorClass, this._values.inputErrorClass);
-          this._toggleSubmitButton(this._form, this._values.submitButtonSelector, this._values.inactiveButtonClass);
         }
       });
     })
   }
 
   clearValidation() {
-    const _formInputElements = this._form.querySelectorAll(this._values.inputSelector);
-    Array.from(_formInputElements).forEach((element) => {
+    const formInputElements = this._form.querySelectorAll(this._values.inputSelector);
+    Array.from(formInputElements).forEach((element) => {
       this._hideInputError(this._form, element, this._values.errorClass, this._values.inputErrorClass);
       this._toggleSubmitButton(this._form, this._values.submitButtonSelector, this._values.inactiveButtonClass);
     });
