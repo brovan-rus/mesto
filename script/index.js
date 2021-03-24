@@ -2,9 +2,15 @@ import {
   initialCards, templateSelector, validationValues, popupProfileEdit,
   popupCardAdd, profileName, profileJob, profileEditButton, cardAddButton, cardsList, forms
 } from './constants.js';
-import {Card} from './card.js';
+import Card from './card.js';
 import {openPopup, closePopupWithForm} from './utils.js';
-import {FormValidator} from "./formValidator.js";
+import FormValidator from './formValidator.js';
+import PopupWithForm from './popupWithForm.js';
+
+const profileEditPopup = new PopupWithForm('.popup_content_profile-edit', (inputValues) => {
+  profileName.textContent = inputValues.name;
+  profileJob.textContent = inputValues.job;
+});
 
 // Объявление элементов форм
 const profileForm = forms.profile;
@@ -16,6 +22,10 @@ const cardLinkInput = cardAddForm.elements.link;
 profileNameInput.value = profileName.textContent;
 profileJobInput.value = profileJob.textContent;
 
+console.log(profileForm);
+console.log(Array.from(profileForm.querySelectorAll('.form__input')).map((element) => {return (element.value)}));
+
+
 // Создаём экземпляры класса formValidator
 const profileFormValidator = new FormValidator(validationValues, profileForm);
 const cardAddFormValidator = new FormValidator(validationValues, cardAddForm);
@@ -23,12 +33,12 @@ profileFormValidator.enableValidation();
 cardAddFormValidator.enableValidation();
 
 // Функция для обработки кнопок отправки формы
-function handleProfileEdit(evt) {
-  evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileJob.textContent = profileJobInput.value;
-  closePopupWithForm(popupProfileEdit);
-}
+// function handleProfileEdit(evt) {
+//   evt.preventDefault();
+//   profileName.textContent = profileNameInput.value;
+//   profileJob.textContent = profileJobInput.value;
+//   closePopupWithForm(popupProfileEdit);
+// }
 
 function handleCardAdd(evt) {
   evt.preventDefault();
@@ -55,7 +65,7 @@ function handleProfileEditOpen() {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
   profileFormValidator.clearValidation();
-  openPopup(popupProfileEdit);
+  profileEditPopup.open();
 }
 
 function handleCardAddOpen() {
@@ -65,7 +75,7 @@ function handleCardAddOpen() {
 
 // Обрабочики событий отправки форм
 cardAddForm.addEventListener('submit', handleCardAdd);
-profileForm.addEventListener('submit', handleProfileEdit);
+//profileForm.addEventListener('submit', handleProfileEdit);
 // Добавляем обработчики кнопок "Редактировать профиль" и "Добавление карточки"
 profileEditButton.addEventListener('click', handleProfileEditOpen);
 cardAddButton.addEventListener('click', handleCardAddOpen);
