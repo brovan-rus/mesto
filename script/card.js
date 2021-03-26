@@ -1,10 +1,8 @@
-import {openPopup} from './utils.js';
-import {popupPhoto, popupPhotoImage, popupPhotoTitle} from "./constants.js";
-
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._data = data;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // Публичный метод создания карточки.
@@ -31,16 +29,9 @@ export default class Card {
     evt.target.closest('li').remove();
   }
 
-  _handlePreviewPicture(data) {
-    popupPhotoImage.src = data.link;
-    popupPhotoImage.alt = data.name;
-    popupPhotoTitle.textContent = data.name;
-    openPopup(popupPhoto);
-  }
-
   // Добавление слушателей
   _addCardListeners(cardTemplate, cardImage) {
-    cardImage.addEventListener('click', () => this._handlePreviewPicture(this._data));
+    cardImage.addEventListener('click', () => this._handleCardClick(this._data));
     const delButton = cardTemplate.querySelector('.card__trash-button');
     delButton.addEventListener('click', this._handleDeleteCard);
     const likeButton = cardTemplate.querySelector('.card__like-button');

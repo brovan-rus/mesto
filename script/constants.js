@@ -38,12 +38,12 @@ export const validationValues = {
 
 export const templateSelector = '#card';
 export const closeKey = 'Escape';
+export const cardListContainerSelector = '.cards__list';
 
 // Объявляем элементы popup
 export const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
 export const popupCardAdd = document.querySelector('.popup_content_card-add');
 export const popupPhoto = document.querySelector('.popup_content_photo');
-export const popupPhotoImage = popupPhoto.querySelector('.popup__photo');
 export const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo');
 
 // Объявляем элементы документа
