@@ -7,7 +7,6 @@
   <meta name="description"
     content="Учебный сайт mesto представляет собой интерактивную страницу, куда можно добавлять фотографии, удалять их и ставить лайки">
   <meta name="copyright" content="Yandex Praktikum">
-  <link rel="stylesheet" href="./pages/pages.css">
   <title>Mesto. Russia.</title>
 </head>
 <body>
@@ -19,7 +18,7 @@
     </header>
     <main class="content page__content">
       <section class="profile content__profile">
-        <img class="profile__photo" src="./images/kusto.jpg" alt="Фотография профиля">
+        <img class="profile__photo" src="<%=require('images/kusto.jpg')%>"  alt="Фотография профиля">
         <div class="profile__container">
           <div class=profile__name-containter>
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -55,7 +54,7 @@
       <div class="popup popup_content_photo">
         <div class="popup__container popup__container_content_photo">
           <button type="button" class="popup__close-button"></button>
-          <img src="./images/kazan.jpg" alt="Казань" class="popup__photo">
+          <img src="<%=require('./images/kazan.jpg')%>" alt="Казань" class="popup__photo">
           <h2 class="popup__title popup__title_content_photo">Казань</h2>
         </div>
       </div>
@@ -79,7 +78,7 @@
       <li>
         <div class="card">
           <button type="button" class="card__trash-button"></button>
-          <img class="card__image" src="./images/kazan.jpg" alt="Фотография города Казань, мечеть Кул-Шариф">
+          <img class="card__image" src="<%=require(./images/kazan.jpg)%>" alt="Фотография города Казань, мечеть Кул-Шариф">
           <div class="card__description">
             <h2 class="card__title">Казань</h2>
             <button type="button" class="card__like-button"></button>
@@ -87,6 +86,5 @@
         </div>
       </li>
   </template>
-  <script src="./script/index.js" type="module"></script>
 </body>
 </html>
