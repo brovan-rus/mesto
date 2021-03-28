@@ -36,22 +36,25 @@ export const validationValues = {
   errorClass: 'form__input-error_active'
 };
 
-export const templateSelector = '#card';
-export const closeKey = 'Escape';
-export const cardListContainerSelector = '.cards__list';
+// Объявление селекторов документа
 
-// Объявляем элементы popup
-export const popupProfileEdit = document.querySelector('.popup_content_profile-edit');
-export const popupCardAdd = document.querySelector('.popup_content_card-add');
-export const popupPhoto = document.querySelector('.popup_content_photo');
-export const popupPhotoTitle = popupPhoto.querySelector('.popup__title_content_photo');
+export const templateSelector = '#card';
+export const cardListContainerSelector = '.cards__list';
+export const userNameSelector = '.profile__name';
+export const userJobSelector = '.profile__job';
+export const popupProfileEditSelector = '.popup_content_profile-edit';
+export const popupCardAddSelector = '.popup_content_card-add';
+export const popupImageSelector = '.popup_content_photo';
 
 // Объявляем элементы документа
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__job');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const cardAddButton = document.querySelector('.profile__plus-button');
-export const cardsList = document.querySelector('.cards__list');
 
 // Объявляем формы документа
-export const forms = document.forms;
+const forms = document.forms;
+const profileForm = forms.profile;
+export const profileNameInput = profileForm.elements.userName;
+export const profileJobInput = profileForm.elements.userJob;
+
+// Объявление кнопки для закрытия попапа
+export const closeKey = 'Escape';

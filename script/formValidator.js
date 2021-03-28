@@ -20,7 +20,7 @@ export default class FormValidator {
     errorMessageContainer.classList.remove(errorClass);
     errorMessageContainer.textContent = '';
     inputElement.classList.remove(inputErrorClass);
-    }
+  }
 
 
   _toggleSubmitButton(form, submitButtonSelector, inactiveButtonClass) {
