@@ -3,24 +3,23 @@ import {
   cardAddButton, cardListContainerSelector, userJobSelector, userNameSelector,
   popupProfileEditSelector, popupCardAddSelector, popupImageSelector, profileNameInput,
   profileJobInput
-} from './constants.js';
-import Card from './card.js';
-import FormValidator from './formValidator.js';
-import PopupWithForm from './popupWithForm.js';
-import PopupWithImage from "./popupWithImage.js";
-import Section from './section.js';
-import UserInfo from './userInfo.js';
+} from '../components/constants.js';
+import Card from '../components/card.js';
+import FormValidator from '../components/formValidator.js';
+import PopupWithForm from '../components/popupWithForm.js';
+import PopupWithImage from "../components/popupWithImage.js";
+import Section from '../components/section.js';
+import UserInfo from '../components/userInfo.js';
 
-// Объявляем экземпляры классов для попапов с формами
+// Объявляем экземпляры классов для попапов
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
   userInfo.setUserInfo(inputValues);
 });
 
+const popupWithImage = new PopupWithImage(popupImageSelector);
+
 const cardAddPopup = new PopupWithForm(popupCardAddSelector, (inputValues) => {
-  const addingCard = new Card(inputValues, templateSelector, () => {
-    new PopupWithImage(popupImageSelector, inputValues).open();
-  }).create();
-  cardsListSection.addItem(addingCard);
+  cardsListSection.addItem(createCard(inputValues));
 });
 
 //Создаём экземпляры класса formValidator и включаем валидацию
@@ -33,10 +32,7 @@ cardAddFormValidator.enableValidation();
 const cardsListSection = new Section({
   items: initialCards,
   renderer: (item) => {
-    const currentCard = new Card(item, templateSelector, () => {
-      new PopupWithImage(popupImageSelector, item).open();
-    }).create();
-    cardsListSection.addItem(currentCard);
+    cardsListSection.addItem(createCard(item));
   }
 }, cardListContainerSelector);
 
@@ -55,6 +51,13 @@ function handleProfileEditOpen() {
 function handleCardAddOpen() {
   cardAddFormValidator.clearValidation();
   cardAddPopup.open();
+}
+
+function createCard(inputValues) {
+  const card = new Card(inputValues, templateSelector, () => {
+    popupWithImage.open(inputValues);
+  });
+  return card.create();
 }
 
 // Добавляем обработчики кнопок "Редактировать профиль" и "Добавление карточки"
