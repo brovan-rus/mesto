@@ -1,6 +1,33 @@
 .profile__photo {
   width: 120px;
   border-radius: 50%;
+  cursor: pointer;
+  background-image: url('../../../images/kusto.jpg');
+  background-position: center;
+  background-size: contain;
+  height: 120px;
+  position: relative;
+}
+
+.profile__photo::after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  background-image: url('../../../images/pensil.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px 26px;
+  transition: opacity 0.6s linear;
+  opacity: 0;
+}
+
+.profile__photo:hover::after {
+  opacity: 1;
 }
 
 @media screen and (max-width: 920px){
