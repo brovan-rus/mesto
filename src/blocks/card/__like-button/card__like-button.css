@@ -9,6 +9,7 @@
   background-color: inherit;
   border: 0;
   outline: none;
+  margin-bottom: 3px;
 }
 
 .card__like-button:hover{

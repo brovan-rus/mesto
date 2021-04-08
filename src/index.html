@@ -64,6 +64,22 @@
     </div>
   </div>
 
+  <div class="popup popup_content_profile-edit">
+    <div class="popup__container popup__container_content_form">
+      <button type="button" class="popup__close-button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form name="profile" action="#" class="form" novalidate>
+        <input class="form__input form__input_info_name" autocomplete="off" id="profile-name-input" required
+               minlength="2" maxlength="40" type="text" name="userName" placeholder="Имя">
+        <span class="form__input-error profile-name-input-error"></span>
+        <input class="form__input form__input_info_value" autocomplete="off" id="profile-job-input" required
+               minlength="2" maxlength="200" type="text" name="userJob" placeholder="О себе">
+        <span class="form__input-error profile-job-input-error"></span>
+        <button class="form__submit-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <div class="popup popup_content_card-add">
     <div class="popup__container popup__container_content_form">
       <button type="button" class="popup__close-button"></button>
@@ -88,7 +104,10 @@
       <img class="card__image" src="<%=require('./images/kazan.jpg')%>" alt="Фотография города Казань, мечеть Кул-Шариф">
       <div class="card__description">
         <h2 class="card__title">Казань</h2>
-        <button type="button" class="card__like-button"></button>
+        <div class="card__like-container">
+          <button type="button" class="card__like-button"></button>
+          <span class="card__like-counter">55</span>
+        </div>
       </div>
     </div>
   </li>
