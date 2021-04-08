@@ -46,3 +46,6 @@
 @import url('../blocks/form/__submit-button/_disabled/form__submit-button_disabled.css');
 @import url('../blocks/card/__like-counter/card__like-counter.css');
 @import url('../blocks/card/__like-container/card__like-container.css');
+@import url('../blocks/popup/__title/_content/popup__title_content_delete-card.css');
+@import url('../blocks/popup/__title/_content/popup__title_content_avatar-renew.css');
+@import url('../blocks/form/__input-error/_content/form__input-error_content_avatar-renew.css');
