@@ -10,6 +10,23 @@ import PopupWithForm from '../components/popupWithForm.js';
 import PopupWithImage from "../components/popupWithImage.js";
 import Section from '../components/section.js';
 import UserInfo from '../components/userInfo.js';
+import Api from '../components/api.js';
+
+const apiUrl = 'https://mesto.nomoreparties.co';
+const cohort = 22;
+const token = 'a117537f-0d63-496d-890f-35a7461e03ea';
+const api = new Api (apiUrl, cohort, token);
+
+
+api.getInitialCards(apiUrl, cohort, token)
+  .then((answer) => console.log(answer))
+  .catch((answer) => console.log(answer));
+
+api.getCurrentUser(apiUrl, cohort, token)
+  .then((answer) => console.log(answer))
+  .catch((answer) => console.log(answer));
+
+
 
 // Объявляем экземпляры классов для попапов
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
