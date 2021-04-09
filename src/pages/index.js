@@ -29,16 +29,17 @@ function setCardListFromServer() {
             createCard({
               name: `${element.name}`,
               link: `${element.link}`,
-              likes: `${element.likes.length}`
+              likes: `${element.likes.length}`,
+              id: `${element._id}`
             })
           );
-
-          console.log(element.name, element.likes.length);
         }
       )
     })
     .catch((answer) => console.log(answer));
 }
+
+
 
 //Функция установки данных пользователя согласно ответу с сервера
 function setUserFromServer () {
@@ -54,19 +55,12 @@ function renewUserInfo(userData) {
     .then((answer) => setUserFromServer())
     .catch((err) => console.log(err));
 }
-//
-// function handleCardAdd(cardData) {
-//
 
 
 setCardListFromServer();
 setUserFromServer();
 
-// userInfo.setUserInfo({userName: 'Константин', userJob: 'Бровцев', userAvatar: 'https://images.unsplash.com/photo-1611095968462-3dc56b14454a?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80'});
 
-
-// api.getCurrentUser(apiUrl, cohort, token)
-//   .then((answer) => console.log(answer));
 
 // Объявляем экземпляры классов для попапов
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
@@ -117,9 +111,17 @@ function handleCardAddOpen() {
 }
 
 function createCard(inputValues) {
-  const card = new Card(inputValues, templateSelector, () => {
+  const card = new Card(
+    inputValues,
+    templateSelector,
+    () => {
     popupWithImage.open(inputValues);
-  });
+  },
+    () => {
+
+
+    }
+  );
   return card.create();
 }
 
