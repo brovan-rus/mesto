@@ -13,6 +13,8 @@ export default class Card {
     this._cardLikeCounter = this._cardTemplate.querySelector('.card__like-counter');
     this._likeButton = this._cardTemplate.querySelector('.card__like-button');
     this._isLiked = data.isLikedByMe;
+    this._delButton = this._cardTemplate.querySelector('.card__trash-button');
+    this._owner = data.owner;
 
 
     // this._likeButton = this._cardTemplate.querySelector('.card__like-button');
@@ -29,11 +31,14 @@ export default class Card {
     const cardImage = this._cardTemplate.querySelector('.card__image');
     const card = this._cardTemplate.querySelector('.card');
     const cardLikeCounter = this._cardTemplate.querySelector('.card__like-counter');
+    if (!this._owner) {
+      this._delButton.classList.add('card__trash-button_inactive')}
     cardImage.src = this._data.link;
     cardImage.alt = this._data.name;
     cardLikeCounter.textContent = this._data.likes;
     card.id = this._data.id;
     this._addCardListeners(this._cardTemplate, cardImage);
+
     if (this._isLiked) {
       this._likeButton.classList.add('card__like-button_active');
       return (this._cardTemplate)
@@ -61,8 +66,8 @@ export default class Card {
   // Добавление слушателей
   _addCardListeners(cardTemplate, cardImage) {
     cardImage.addEventListener('click', () => this._handleCardClick(this._data));
-    const delButton = cardTemplate.querySelector('.card__trash-button');
-    delButton.addEventListener('click', this._handleDeleteCard);
+  //  const delButton = cardTemplate.querySelector('.card__trash-button');
+    this._delButton.addEventListener('click', this._handleDeleteCard);
    // const likeButton = cardTemplate.querySelector('.card__like-button');
     this._likeButton.addEventListener('click', this._handleCardLike);
   }
