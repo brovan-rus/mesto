@@ -33,6 +33,40 @@ export default class Api {
       });
   }
 
+  setCurrentUser(userData) {
+    return fetch (`${this._url}/v1/cohort-${this._groupId}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: userData.userName,
+        about: userData.userJob,
+      })
+    })
+      .then((answer) => {if (answer.ok) {return (answer.json())}
+      return Promise.reject(`Ошибка ${answer.status}`);
+      })
+  }
+
+  addNewCard(cardData) {
+    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: cardData.name,
+        link: cardData.link
+      })
+    })
+        .then((answer) => {if (answer.ok) {return (answer.json())}
+        return Promise.reject(`Ошибка ${answer.status}`);
+    })
+  }
+
 
 
 }

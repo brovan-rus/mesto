@@ -1,30 +1,7 @@
-// Данный в задании массив значений для карточек
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+// Данные для работы с API
+export const apiUrl = 'https://mesto.nomoreparties.co';
+export const cohort = 22;
+export const token = 'a117537f-0d63-496d-890f-35a7461e03ea';
 
 // Изначальные значения для настройки валидации форм
 export const validationValues = {
@@ -42,6 +19,7 @@ export const templateSelector = '#card';
 export const cardListContainerSelector = '.cards__list';
 export const userNameSelector = '.profile__name';
 export const userJobSelector = '.profile__job';
+export const userAvatarSelector = '.profile__photo'
 export const popupProfileEditSelector = '.popup_content_profile-edit';
 export const popupCardAddSelector = '.popup_content_card-add';
 export const popupImageSelector = '.popup_content_photo';

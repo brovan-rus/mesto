@@ -2,7 +2,7 @@ import {
   initialCards, templateSelector, validationValues, profileEditButton,
   cardAddButton, cardListContainerSelector, userJobSelector, userNameSelector,
   popupProfileEditSelector, popupCardAddSelector, popupImageSelector, profileNameInput,
-  profileJobInput
+  profileJobInput, userAvatarSelector, cohort, apiUrl, token
 } from '../components/constants.js';
 import Card from '../components/card.js';
 import FormValidator from '../components/formValidator.js';
@@ -12,46 +12,76 @@ import Section from '../components/section.js';
 import UserInfo from '../components/userInfo.js';
 import Api from '../components/api.js';
 
-const apiUrl = 'https://mesto.nomoreparties.co';
-const cohort = 22;
-const token = 'a117537f-0d63-496d-890f-35a7461e03ea';
+// Создаём экземляр класса для работы с API
 const api = new Api (apiUrl, cohort, token);
+// Объявляем экземпляр класса для работы с информацией о пользователе
+const userInfo = new UserInfo(userNameSelector, userJobSelector, userAvatarSelector);
 
 
-// api.getInitialCards(apiUrl, cohort, token)
-//   .then((answer) => console.log(answer))
-//   .catch((answer) => console.log(answer));
+// `
 
+// Функция заполнения карточек согласно запросу с сервера
+function setCardListFromServer() {
+  api.getInitialCards()
+    .then((answer) => {
+      answer.forEach((element) => {
+          cardsListSection.addItem(
+            createCard({
+              name: `${element.name}`,
+              link: `${element.link}`,
+              likes: `${element.likes.length}`
+            })
+          );
 
-api.getInitialCards(apiUrl, cohort, token)
-  .then((answer) => {
-    answer.forEach((element) => {
-      console.log(`name: ${element.name}`, `link: ${element.link}`)
-      cardsListSection.addItem(createCard({name: `${element.name}`, link: `${element.link}`}));
+          console.log(element.name, element.likes.length);
+        }
+      )
     })
-    })
-  .catch((answer) => console.log(answer));
+    .catch((answer) => console.log(answer));
+}
+
+//Функция установки данных пользователя согласно ответу с сервера
+function setUserFromServer () {
+  api.getCurrentUser()
+    .then((answer) => userInfo.getUserInfo(answer))
+    .then((userData) => userInfo.setUserInfo(userData))
+    .catch((err) => console.log(err));
+}
+
+//Функция обновления данных пользователя в профиле и на сервере
+function renewUserInfo(userData) {
+  api.setCurrentUser(userData)
+    .then((answer) => setUserFromServer())
+    .catch((err) => console.log(err));
+}
+//
+// function handleCardAdd(cardData) {
+//
 
 
+setCardListFromServer();
+setUserFromServer();
+
+// userInfo.setUserInfo({userName: 'Константин', userJob: 'Бровцев', userAvatar: 'https://images.unsplash.com/photo-1611095968462-3dc56b14454a?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80'});
 
 
 // api.getCurrentUser(apiUrl, cohort, token)
-//   .then((answer) => console.log(answer))
-//   .catch((answer) => console.log(answer));
-
-
+//   .then((answer) => console.log(answer));
 
 // Объявляем экземпляры классов для попапов
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
-  userInfo.setUserInfo(inputValues);
+  renewUserInfo(inputValues);
 });
 
 const popupWithImage = new PopupWithImage(popupImageSelector);
 
-const cardAddPopup = new PopupWithForm(popupCardAddSelector, (inputValues) => {
-  cardsListSection.addItem(createCard(inputValues));
-});
-
+const cardAddPopup = new PopupWithForm(popupCardAddSelector,
+  (inputValues) => {
+    api.addNewCard(inputValues)
+      .then((answer) => cardsListSection.addItemToTop(createCard(inputValues),))
+      .catch((err) => console.log(err))
+  }
+);
 
 //Создаём экземпляры класса formValidator и включаем валидацию
 const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
@@ -67,16 +97,18 @@ const cardsListSection = new Section({
   }
 }, cardListContainerSelector);
 
-// Объявляем экземпляр класса для работы с информацией о пользователе
-const userInfo = new UserInfo(userNameSelector, userJobSelector);
 
 //Функции обработчики кнопок открытия попапов с формами
 function handleProfileEditOpen() {
-  const userData = userInfo.getUserInfo();
-  profileNameInput.value = userData.userName;
-  profileJobInput.value = userData.userJob;
-  profileEditPopup.open();
-  profileFormValidator.clearValidation();
+    api.getCurrentUser()
+      .then((answer) => userInfo.getUserInfo(answer))
+      .then((userData) => {
+        profileNameInput.value = userData.userName;
+        profileJobInput.value = userData.userJob;
+        profileEditPopup.open();
+        profileFormValidator.clearValidation();
+      })
+      .catch((err) => console.log(err));
 }
 
 function handleCardAddOpen() {
@@ -95,5 +127,5 @@ function createCard(inputValues) {
 profileEditButton.addEventListener('click', handleProfileEditOpen);
 cardAddButton.addEventListener('click', handleCardAddOpen);
 
-// Добавляем изначальный список карточек в разметку
-cardsListSection.addAllItems();
+// // Добавляем изначальный список карточек в разметку
+// cardsListSection.addAllItems();

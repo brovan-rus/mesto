@@ -4,9 +4,10 @@
   cursor: pointer;
   background-image: url('../../../images/kusto.jpg');
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   height: 120px;
   position: relative;
+  background-repeat: no-repeat;
 }
 
 .profile__photo::after {

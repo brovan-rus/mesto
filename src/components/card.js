@@ -13,8 +13,10 @@ export default class Card {
       .cloneNode('true');
     cardTemplate.querySelector('.card__title').textContent = this._data.name;
     const cardImage = cardTemplate.querySelector('.card__image');
+    const cardLikeCounter = cardTemplate.querySelector('.card__like-counter')
     cardImage.src = this._data.link;
     cardImage.alt = this._data.name;
+    cardLikeCounter.textContent = this._data.likes;
     this._addCardListeners(cardTemplate, cardImage);
     return cardTemplate;
   }
