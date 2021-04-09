@@ -18,13 +18,26 @@ const token = 'a117537f-0d63-496d-890f-35a7461e03ea';
 const api = new Api (apiUrl, cohort, token);
 
 
+// api.getInitialCards(apiUrl, cohort, token)
+//   .then((answer) => console.log(answer))
+//   .catch((answer) => console.log(answer));
+
+
 api.getInitialCards(apiUrl, cohort, token)
-  .then((answer) => console.log(answer))
+  .then((answer) => {
+    answer.forEach((element) => {
+      console.log(`name: ${element.name}`, `link: ${element.link}`)
+      cardsListSection.addItem(createCard({name: `${element.name}`, link: `${element.link}`}));
+    })
+    })
   .catch((answer) => console.log(answer));
 
-api.getCurrentUser(apiUrl, cohort, token)
-  .then((answer) => console.log(answer))
-  .catch((answer) => console.log(answer));
+
+
+
+// api.getCurrentUser(apiUrl, cohort, token)
+//   .then((answer) => console.log(answer))
+//   .catch((answer) => console.log(answer));
 
 
 
@@ -38,6 +51,7 @@ const popupWithImage = new PopupWithImage(popupImageSelector);
 const cardAddPopup = new PopupWithForm(popupCardAddSelector, (inputValues) => {
   cardsListSection.addItem(createCard(inputValues));
 });
+
 
 //Создаём экземпляры класса formValidator и включаем валидацию
 const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
