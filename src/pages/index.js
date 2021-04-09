@@ -20,35 +20,93 @@ const userInfo = new UserInfo(userNameSelector, userJobSelector, userAvatarSelec
 
 // Функция заполнения карточек согласно запросу с сервера
 function setCardListFromServer() {
-  const getInitialCards = api.getInitialCards()
-  const getUserId = api.getCurrentUser()
-  const conditions = [getInitialCards, getUserId];
 
-  Promise.all(conditions)
-    .then((results) => {
-      results[0].forEach((element) => {
-        const isLikedByMe = (element.likes.some((element) => element._id = results[1]._id));
-        if (isLikedByMe) {
-          cardsListSection.addItem(createCard({
-            name: `${element.name}`,
-            link: `${element.link}`,
-            id: `${element._id}`,
-            likes: `${element.likes.length}`,
-            isLikedByMe: true
-          }))
-        }
-        else {
-          cardsListSection.addItem(createCard({
-            name: `${element.name}`,
-            link: `${element.link}`,
-            id: `${element._id}`,
-            likes: `${element.likes.length}`,
-            isLikedByMe: false
-          }))
-        }
-      })
-    });
+  api.getCurrentUser()
+    .then((userInfo) => {
+      return (userInfo._id)
+    })
+    .then((userID) => {
+      api.getInitialCards()
+        .then((cardsList) => {
+
+          const cardData = [{
+            name: '',
+            link: '',
+            id: '',
+            likes: 0,
+            isLikedByMe: false,
+            owner: false
+          }];
+
+          cardsList.forEach((card) => {
+            cardData.name = card.name;
+            cardData.link = card.link;
+            cardData.id = card._id;
+            cardData.likes = card.likes.length;
+            cardData.isLikedByMe = card.likes.some((like) => {return (like._id === userID)})
+            cardData.owner = card.owner._id === userID
+            cardsListSection.addItem((createCard(cardData)));
+            //console.log(card.likes);
+            //console.log(card.name, card.likes, cardData.isLikedByMe);
+          })
+
+
+
+          // for (let i=0; i<=cardsList.length, i++){
+          // }
+
+          // console.log(cardData);
+
+          // cardsList.forEach((card) => {
+          //  card.likes.forEach((like) => {
+          //    if (like._id === userID) {
+          //
+          //
+          //
+          //      })
+          //     )
+          //    }
+          //    // else {
+             //   console.log('Not liked', card.name);
+             //   cardsListSection.addItem(createCard({
+             //     name: `${card.name}`,
+             //     link: `${card.link}`,
+             //     id: `${card._id}`,
+             //     likes: `${card.likes.length}`,
+             //     isLikedByMe: false
+             //   }))
+          //    // };
+          //   })
+          //   // if (isLikedByMe) {console.log(card, card.likes);}
+          //  // console.log(card.name, card.likes);
+          // })
+        })
+    })
 }
+
+
+
+
+  // Promise.all(conditions)
+  //   .then((results) => {
+  //     results[0].forEach((element) => {
+  //       element.likes.forEach((like) => {
+  //         if (like._id === results[1]._id) {
+  //           console.log(like._id, element.name)
+  //           cardsListSection.addItem(createCard({
+  //             name: `${element.name}`,
+  //             link: `${element.link}`,
+  //             id: `${element._id}`,
+  //             likes: `${element.likes.length}`,
+  //             isLikedByMe: true
+  //           }))}
+  //       })
+  //
+  //
+  //     })
+  //   })
+  //   .catch((err) => {console.log(`Произошла ошибка ${err}`)});
+
 
 
 
@@ -163,13 +221,26 @@ function createCard(inputValues) {
     inputValues,
     templateSelector,
     () => {
-    popupWithImage.open(inputValues);
-  },
-    (cardID) => {
-      api.setCardLike(cardID)
-        .then((answer) => answer.likes.length)
-        .then((likes)=> card.renewLikeCounter(likes))
-        .catch((err) => console.log(err));
+      popupWithImage.open(inputValues);
+    },
+    (cardID, isLikedByMe) => {
+      if (!isLikedByMe) {
+        api.setCardLike(cardID)
+          .then((answer) => answer.likes.length)
+          .then((likes) => {
+            card.renewLikeCounter(likes);
+          })
+          .catch((err) => console.log(err))
+      }
+
+      else {
+        api.removeCardLike(cardID)
+          .then((answer) => answer.likes.length)
+          .then((likes) => {
+            card.renewLikeCounter(likes);
+          })
+          .catch(((err) => console.log(err)))
+      }
     }
   );
   return card.create();

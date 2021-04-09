@@ -68,7 +68,7 @@ export default class Api {
   }
 
   setCardLike(cardID) {
-    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/likes/${cardID}/`, {
+    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/likes/${cardID}`, {
       method: 'PUT',
       headers: {
         authorization: this._token,
@@ -79,18 +79,30 @@ export default class Api {
       return Promise.reject(`Ошибка ${answer.status}`)});
   }
 
-  getCardData(cardID) {
-    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/${cardID}`, {
+  // getCardData(cardID) {
+  //   return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/${cardID}`, {
+  //     headers: {
+  //       authorization: this._token
+  //     }
+  //   })
+  //     .then((request) => {
+  //       if (request.ok) {
+  //         return request.json();
+  //       }
+  //       return  Promise.reject(`Ошибка ${request.status}`);
+  //     });
+  // }
+
+  removeCardLike(cardID){
+    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/likes/${cardID}`, {
+      method: 'DELETE',
       headers: {
-        authorization: this._token
+        authorization: this._token,
+        'Content-Type': 'application/json',
       }
     })
-      .then((request) => {
-        if (request.ok) {
-          return request.json();
-        }
-        return  Promise.reject(`Ошибка ${request.status}`);
-      });
+      .then((answer) => {if (answer.ok) {return (answer.json())}
+        return Promise.reject(`Ошибка ${answer.status}`)});
   }
 
 }
