@@ -187,11 +187,16 @@ const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValue
   renewUserInfo(inputValues);
 });
 const popupWithImage = new PopupWithImage(popupImageSelector);
+
+
 const cardAddPopup = new PopupWithForm(popupCardAddSelector,
   (inputValues) => {
     inputValues.owner = true;
     api.addNewCard(inputValues)
-      .then((answer) => cardsListSection.addItemToTop(createCard(inputValues),))
+      .then((answer) => {
+        inputValues.id = answer._id;
+        cardsListSection.addItemToTop(createCard(inputValues),)
+      })
       .catch((err) => console.log(err))
   }
 );
@@ -267,8 +272,6 @@ function createCard(inputValues) {
 
     (cardID, evt) => {
       popupWithOneButton.open(cardID, evt);
-      console.log(evt);
-
     }
 
   );
