@@ -13,14 +13,12 @@ import UserInfo from '../components/userInfo.js';
 import Api from '../components/api.js';
 import PopupWithOneButton from '../components/popupWithOneButton.js';
 
-
-
-
 // Создаём экземляр класса для работы с API
 const api = new Api (apiUrl, cohort, token);
 // Объявляем экземпляр класса для работы с информацией о пользователе
 const userInfo = new UserInfo(userNameSelector, userJobSelector, userAvatarSelector);
 
+// Объявляем экземпляры классов для попапов
 const popupWithOneButton = new PopupWithOneButton(
   popupCardDeleteSelector, (cardID, evt) => {
     api.removeCard(cardID)
@@ -31,6 +29,42 @@ const popupWithOneButton = new PopupWithOneButton(
       .catch((err) => console.log(err));
   }
 );
+
+const popupAvatarChange = new PopupWithForm(popupAvatarRenewSelector, (inputValues) => {
+  console.log(inputValues);
+  api.avatarChange(inputValues.link)
+    .then((answer) => {
+      console.log(answer);
+      setUserFromServer();
+    })
+    .catch((err) => {console.log(`Произошла ошибка ${err}`)})
+})
+
+const cardAddPopup = new PopupWithForm(popupCardAddSelector,
+  (inputValues) => {
+    inputValues.owner = true;
+    api.addNewCard(inputValues)
+      .then((answer) => {
+        inputValues.id = answer._id;
+        cardsListSection.addItemToTop(createCard(inputValues))
+      })
+      .catch((err) => console.log(err))
+  }
+);
+
+const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
+  renewUserInfo(inputValues);
+});
+const popupWithImage = new PopupWithImage(popupImageSelector);
+
+//Создаём экземпляры класса formValidator и включаем валидацию
+const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
+const cardAddFormValidator = new FormValidator(validationValues, cardAddPopup.form());
+const avatarChangeValidator = new FormValidator(validationValues, popupAvatarChange.form())
+console.log(popupAvatarChange.form());
+profileFormValidator.enableValidation();
+cardAddFormValidator.enableValidation();
+avatarChangeValidator.enableValidation();
 
 // Функция заполнения карточек согласно запросу с сервера
 function setCardListFromServer() {
@@ -78,41 +112,14 @@ function renewUserInfo(userData) {
     .catch((err) => console.log(err));
 }
 
-// Объявляем экземпляры классов для попапов
-const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
-  renewUserInfo(inputValues);
-});
-const popupWithImage = new PopupWithImage(popupImageSelector);
 
 
-const cardAddPopup = new PopupWithForm(popupCardAddSelector,
-  (inputValues) => {
-    inputValues.owner = true;
-    api.addNewCard(inputValues)
-      .then((answer) => {
-        inputValues.id = answer._id;
-        cardsListSection.addItemToTop(createCard(inputValues),)
-      })
-      .catch((err) => console.log(err))
-  }
-);
-
-const popupAvatarChange = new PopupWithForm(popupAvatarRenewSelector, (inputValues) => {
-  console.log(inputValues);
-  api.avatarChange(inputValues.link)
-    .then((answer) => {
-      console.log(answer);
-      setUserFromServer();
-    })
-    .catch((err) => {console.log(`Произошла ошибка ${err}`)})
-})
 
 
-//Создаём экземпляры класса formValidator и включаем валидацию
-const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
-const cardAddFormValidator = new FormValidator(validationValues, cardAddPopup.form());
-profileFormValidator.enableValidation();
-cardAddFormValidator.enableValidation();
+
+
+
+
 
 // Объявляем экземпляр класса для работы с разметкой Section
 const cardsListSection = new Section(cardListContainerSelector);
@@ -178,6 +185,7 @@ function createCard(inputValues) {
 }
 
 function handleAvatarChangeOpen(){
+  avatarChangeValidator.clearValidation();
   popupAvatarChange.open();
 }
 
