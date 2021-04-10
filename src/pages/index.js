@@ -31,17 +31,21 @@ const popupWithOneButton = new PopupWithOneButton(
 );
 
 const popupAvatarChange = new PopupWithForm(popupAvatarRenewSelector, (inputValues) => {
-  console.log(inputValues);
+  popupAvatarChange.toggleButtonState();
   api.avatarChange(inputValues.link)
     .then((answer) => {
-      console.log(answer);
       setUserFromServer();
     })
     .catch((err) => {console.log(`Произошла ошибка ${err}`)})
+    .finally(() => popupAvatarChange.toggleButtonState())
 })
+
+
+
 
 const cardAddPopup = new PopupWithForm(popupCardAddSelector,
   (inputValues) => {
+    cardAddPopup.toggleButtonState();
     inputValues.owner = true;
     api.addNewCard(inputValues)
       .then((answer) => {
@@ -49,14 +53,16 @@ const cardAddPopup = new PopupWithForm(popupCardAddSelector,
         cardsListSection.addItemToTop(createCard(inputValues))
       })
       .catch((err) => console.log(err))
+      .finally(() => {cardAddPopup.toggleButtonState()});
   }
 );
+
 
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
   renewUserInfo(inputValues);
 });
-const popupWithImage = new PopupWithImage(popupImageSelector);
 
+const popupWithImage = new PopupWithImage(popupImageSelector);
 //Создаём экземпляры класса formValidator и включаем валидацию
 const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
 const cardAddFormValidator = new FormValidator(validationValues, cardAddPopup.form());
@@ -107,9 +113,11 @@ function setUserFromServer () {
 
 //Функция обновления данных пользователя в профиле и на сервере
 function renewUserInfo(userData) {
+  profileEditPopup.toggleButtonState();
   api.setCurrentUser(userData)
     .then((answer) => setUserFromServer())
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => profileEditPopup.toggleButtonState());
 }
 
 
