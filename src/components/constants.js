@@ -29,6 +29,7 @@ export const popupAvatarRenewSelector = '.popup_content_avatar-renew';
 // Объявляем элементы документа
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const cardAddButton = document.querySelector('.profile__plus-button');
+export const avatarElement = document.querySelector('.profile__photo')
 
 // Объявляем формы документа
 const forms = document.forms;

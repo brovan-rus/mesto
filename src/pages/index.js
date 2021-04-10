@@ -1,8 +1,8 @@
 import {
-  initialCards, templateSelector, validationValues, profileEditButton,
+  templateSelector, validationValues, profileEditButton,
   cardAddButton, cardListContainerSelector, userJobSelector, userNameSelector,
   popupProfileEditSelector, popupCardAddSelector, popupImageSelector, profileNameInput,
-  profileJobInput, userAvatarSelector, cohort, apiUrl, token, popupCardDeleteSelector, popupAvatarRenewSelector
+  profileJobInput, userAvatarSelector, cohort, apiUrl, token, popupCardDeleteSelector, popupAvatarRenewSelector, avatarElement
 } from '../components/constants.js';
 import Card from '../components/card.js';
 import FormValidator from '../components/formValidator.js';
@@ -32,11 +32,8 @@ const popupWithOneButton = new PopupWithOneButton(
   }
 );
 
-
-
 // Функция заполнения карточек согласно запросу с сервера
 function setCardListFromServer() {
-
   api.getCurrentUser()
     .then((userInfo) => {
       return (userInfo._id)
@@ -44,7 +41,6 @@ function setCardListFromServer() {
     .then((userID) => {
       api.getInitialCards()
         .then((cardsList) => {
-
           const cardData = [{
             name: '',
             link: '',
@@ -62,69 +58,10 @@ function setCardListFromServer() {
             cardData.isLikedByMe = card.likes.some((like) => {return (like._id === userID)})
             cardData.owner = card.owner._id === userID
             cardsListSection.addItem((createCard(cardData)));
-            //console.log(card.likes);
-            //console.log(card.name, card.likes, cardData.isLikedByMe);
           })
-
-
-
-          // for (let i=0; i<=cardsList.length, i++){
-          // }
-
-          // console.log(cardData);
-
-          // cardsList.forEach((card) => {
-          //  card.likes.forEach((like) => {
-          //    if (like._id === userID) {
-          //
-          //
-          //
-          //      })
-          //     )
-          //    }
-          //    // else {
-             //   console.log('Not liked', card.name);
-             //   cardsListSection.addItem(createCard({
-             //     name: `${card.name}`,
-             //     link: `${card.link}`,
-             //     id: `${card._id}`,
-             //     likes: `${card.likes.length}`,
-             //     isLikedByMe: false
-             //   }))
-          //    // };
-          //   })
-          //   // if (isLikedByMe) {console.log(card, card.likes);}
-          //  // console.log(card.name, card.likes);
-          // })
         })
     })
 }
-
-
-
-
-  // Promise.all(conditions)
-  //   .then((results) => {
-  //     results[0].forEach((element) => {
-  //       element.likes.forEach((like) => {
-  //         if (like._id === results[1]._id) {
-  //           console.log(like._id, element.name)
-  //           cardsListSection.addItem(createCard({
-  //             name: `${element.name}`,
-  //             link: `${element.link}`,
-  //             id: `${element._id}`,
-  //             likes: `${element.likes.length}`,
-  //             isLikedByMe: true
-  //           }))}
-  //       })
-  //
-  //
-  //     })
-  //   })
-  //   .catch((err) => {console.log(`Произошла ошибка ${err}`)});
-
-
-
 
 //Функция установки данных пользователя согласно ответу с сервера
 function setUserFromServer () {
@@ -140,47 +77,6 @@ function renewUserInfo(userData) {
     .then((answer) => setUserFromServer())
     .catch((err) => console.log(err));
 }
-
-
-setCardListFromServer();
-setUserFromServer();
-
-
-
-//
-// function  getCardLikes1() {
-//   api.getInitialCards()
-//     .then((answer) => console.log(answer))
-// }
-// getCardLikes1();
-
-
-// function isLikedByMe(cardID) {
-//
-//   api.getInitialCards()
-//     .then((answer) => {
-//       answer
-//         .forEach((element) => {
-//           if (element._id === cardID) {
-//             return (element.likes)
-//           }
-//         })
-//     })
-//     .then((likes).forEach)
-// }
-//
-// getCardLikes('6070502b4d6c210078d54f03');
-//
-// function isLikedByMe(cardID) {
-//   console.log(getCardLikes(cardID))
-// }
-//
-// isLikedByMe('6070502b4d6c210078d54f03');
-
-// api.setCardLike('60704a464d6c210078d54ee0')
-//   .then((answer) => console.log(answer))
-//   .catch((err) => console.log(err));
-
 
 // Объявляем экземпляры классов для попапов
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
@@ -201,6 +97,16 @@ const cardAddPopup = new PopupWithForm(popupCardAddSelector,
   }
 );
 
+const popupAvatarChange = new PopupWithForm(popupAvatarRenewSelector, (inputValues) => {
+  console.log(inputValues);
+  api.avatarChange(inputValues.link)
+    .then((answer) => {
+      console.log(answer);
+      setUserFromServer();
+    })
+    .catch((err) => {console.log(`Произошла ошибка ${err}`)})
+})
+
 
 //Создаём экземпляры класса formValidator и включаем валидацию
 const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
@@ -209,12 +115,7 @@ profileFormValidator.enableValidation();
 cardAddFormValidator.enableValidation();
 
 // Объявляем экземпляр класса для работы с разметкой Section
-const cardsListSection = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    cardsListSection.addItem(createCard(item));
-  }
-}, cardListContainerSelector);
+const cardsListSection = new Section(cardListContainerSelector);
 
 
 //Функции обработчики кнопок открытия попапов с формами
@@ -234,8 +135,6 @@ function handleCardAddOpen() {
   cardAddFormValidator.clearValidation();
   cardAddPopup.open();
 }
-
-
 
 function createCard(inputValues) {
   const card = new Card(
@@ -278,11 +177,15 @@ function createCard(inputValues) {
   return card.create();
 }
 
+function handleAvatarChangeOpen(){
+  popupAvatarChange.open();
+}
 
+setCardListFromServer();
+setUserFromServer();
 
 // Добавляем обработчики кнопок "Редактировать профиль" и "Добавление карточки"
 profileEditButton.addEventListener('click', handleProfileEditOpen);
 cardAddButton.addEventListener('click', handleCardAddOpen);
+avatarElement.addEventListener('click', handleAvatarChangeOpen)
 
-// // Добавляем изначальный список карточек в разметку
-// cardsListSection.addAllItems();

@@ -117,5 +117,21 @@ export default class Api {
         return Promise.reject(`Ошибка ${answer.status}`)});
   }
 
+  avatarChange(link) {
+    return fetch (`${this._url}/v1/cohort-${this._groupId}/users/me/avatar/`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: link
+      })
+    })
+      .then((answer) => {if (answer.ok) {return (answer.json())}
+        return Promise.reject(`Ошибка ${answer.status}`);
+      })
+  }
+
 
 }
