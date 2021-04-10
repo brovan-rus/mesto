@@ -50,3 +50,4 @@
 @import url('../blocks/popup/__title/_content/popup__title_content_avatar-renew.css');
 @import url('../blocks/form/__input-error/_content/form__input-error_content_avatar-renew.css');
 @import url('../blocks/card/__trash-button/_inactive/card__trash-button_inactive.css');
+@import url('../blocks/popup/__approve-button/popup__approve-button.css');

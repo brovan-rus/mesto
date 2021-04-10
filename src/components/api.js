@@ -105,4 +105,17 @@ export default class Api {
         return Promise.reject(`Ошибка ${answer.status}`)});
   }
 
+  removeCard(cardID) {
+    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/${cardID}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((answer) => {if (answer.ok) {return (answer.json())}
+        return Promise.reject(`Ошибка ${answer.status}`)});
+  }
+
+
 }

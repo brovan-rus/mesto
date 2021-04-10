@@ -2,7 +2,7 @@ import {
   initialCards, templateSelector, validationValues, profileEditButton,
   cardAddButton, cardListContainerSelector, userJobSelector, userNameSelector,
   popupProfileEditSelector, popupCardAddSelector, popupImageSelector, profileNameInput,
-  profileJobInput, userAvatarSelector, cohort, apiUrl, token
+  profileJobInput, userAvatarSelector, cohort, apiUrl, token, popupCardDeleteSelector, popupAvatarRenewSelector
 } from '../components/constants.js';
 import Card from '../components/card.js';
 import FormValidator from '../components/formValidator.js';
@@ -11,11 +11,27 @@ import PopupWithImage from "../components/popupWithImage.js";
 import Section from '../components/section.js';
 import UserInfo from '../components/userInfo.js';
 import Api from '../components/api.js';
+import PopupWithOneButton from '../components/popupWithOneButton.js';
+
+
+
 
 // Создаём экземляр класса для работы с API
 const api = new Api (apiUrl, cohort, token);
 // Объявляем экземпляр класса для работы с информацией о пользователе
 const userInfo = new UserInfo(userNameSelector, userJobSelector, userAvatarSelector);
+
+const popupWithOneButton = new PopupWithOneButton(
+  popupCardDeleteSelector, (cardID, evt) => {
+    api.removeCard(cardID)
+      .then((answer) => {
+        evt.target.closest('li').remove();
+        popupWithOneButton.close()
+      })
+      .catch((err) => console.log(err));
+  }
+);
+
 
 
 // Функция заполнения карточек согласно запросу с сервера
@@ -170,16 +186,16 @@ setUserFromServer();
 const profileEditPopup = new PopupWithForm(popupProfileEditSelector, (inputValues) => {
   renewUserInfo(inputValues);
 });
-
 const popupWithImage = new PopupWithImage(popupImageSelector);
-
 const cardAddPopup = new PopupWithForm(popupCardAddSelector,
   (inputValues) => {
+    inputValues.owner = true;
     api.addNewCard(inputValues)
       .then((answer) => cardsListSection.addItemToTop(createCard(inputValues),))
       .catch((err) => console.log(err))
   }
 );
+
 
 //Создаём экземпляры класса formValidator и включаем валидацию
 const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
@@ -219,10 +235,17 @@ function handleCardAddOpen() {
 function createCard(inputValues) {
   const card = new Card(
     inputValues,
+
     templateSelector,
-    () => {
-      popupWithImage.open(inputValues);
+
+    (evt) => {
+      const currentCardData = {
+        link: `${evt.target.src}`,
+        name: `${evt.path[1].querySelector('.card__title').textContent}`
+      }
+      popupWithImage.open(currentCardData);
     },
+
     (cardID, isLikedByMe) => {
       if (!isLikedByMe) {
         api.setCardLike(cardID)
@@ -232,7 +255,6 @@ function createCard(inputValues) {
           })
           .catch((err) => console.log(err))
       }
-
       else {
         api.removeCardLike(cardID)
           .then((answer) => answer.likes.length)
@@ -241,7 +263,14 @@ function createCard(inputValues) {
           })
           .catch(((err) => console.log(err)))
       }
+    },
+
+    (cardID, evt) => {
+      popupWithOneButton.open(cardID, evt);
+      console.log(evt);
+
     }
+
   );
   return card.create();
 }

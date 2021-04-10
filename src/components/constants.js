@@ -23,6 +23,8 @@ export const userAvatarSelector = '.profile__photo'
 export const popupProfileEditSelector = '.popup_content_profile-edit';
 export const popupCardAddSelector = '.popup_content_card-add';
 export const popupImageSelector = '.popup_content_photo';
+export const popupCardDeleteSelector = '.popup_content_delete-card';
+export const popupAvatarRenewSelector = '.popup_content_avatar-renew';
 
 // Объявляем элементы документа
 export const profileEditButton = document.querySelector('.profile__edit-button');

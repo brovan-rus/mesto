@@ -92,28 +92,30 @@
       </form>
     </div>
   </div>
-</div>
 
-<div class="popup popup_content_delete-card">
-  <div class="popup__container popup__container_content_form">
-    <button type="button" class="popup__close-button"></button>
-    <h2 class="popup__title popup__title_content_delete-card">Вы уверены?</h2>
-    <button class="form__submit-button" type="submit">Да</button>
+  <div class="popup popup_content_delete-card">
+    <div class="popup__container popup__container_content_form">
+      <button type="button" class="popup__close-button"></button>
+      <h2 class="popup__title popup__title_content_delete-card">Вы уверены?</h2>
+      <button class="popup__approve-button" type="button">Да</button>
+    </div>
+  </div>
+
+  <div class="popup popup_content_avatar-renew">
+    <div class="popup__container popup__container_content_form">
+      <button type="button" class="popup__close-button"></button>
+      <h2 class="popup__title popup__title_content_avatar-renew ">Обновить аватар</h2>
+      <form name="profile" action="#" class="form" novalidate>
+        <input class="form__input form__input_info_value" autocomplete="off" required id="avatar-link-input" type="url"
+               name="link" placeholder="Ссылка на аватар">
+        <span class="form__input-error form__input-error_content_avatar-renew card-link-input-error"></span>
+        <button class="form__submit-button" type="submit">Сохранить</button>
+      </form>
+    </div>
   </div>
 </div>
 
-<div class="popup popup_content_avatar-renew">
-  <div class="popup__container popup__container_content_form">
-    <button type="button" class="popup__close-button"></button>
-    <h2 class="popup__title popup__title_content_avatar-renew ">Обновить аватар</h2>
-    <form name="profile" action="#" class="form" novalidate>
-      <input class="form__input form__input_info_value" autocomplete="off" required id="avatar-link-input" type="url"
-             name="link" placeholder="Ссылка на аватар">
-      <span class="form__input-error form__input-error_content_avatar-renew card-link-input-error"></span>
-      <button class="form__submit-button" type="submit">Сохранить</button>
-    </form>
-  </div>
-</div>
+
 
 <template id="card">
   <li>
