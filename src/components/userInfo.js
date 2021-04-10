@@ -4,17 +4,15 @@ export default class UserInfo {
     this._userNameElement = document.querySelector(userNameSelector);
     this._userJobElement = document.querySelector(userJobSelector);
     this._userAvatarElement = document.querySelector(userAvatarSelector);
-    this.getUserID = this.getUserID.bind(this);
   }
 
   getUserInfo(serverAnswer) {
-    const userData = {
+    return {
       'userName': `${serverAnswer.name}`,
       'userJob': `${serverAnswer.about}`,
       'userAvatar': `${serverAnswer.avatar}`,
-      'userID' : `${serverAnswer._id}`
+      'userID': `${serverAnswer._id}`
     };
-    return userData;
   }
 
   setUserInfo({userName, userJob, userAvatar, userID}) {
@@ -22,9 +20,5 @@ export default class UserInfo {
     this._userJobElement.textContent = userJob;
     this._userAvatarElement.style.backgroundImage = `url(${userAvatar})`
     this._userNameElement.id = userID;
-  }
-
-  getUserID() {
-    ;
   }
 }

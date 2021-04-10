@@ -1,8 +1,23 @@
 import {
-  templateSelector, validationValues, profileEditButton,
-  cardAddButton, cardListContainerSelector, userJobSelector, userNameSelector,
-  popupProfileEditSelector, popupCardAddSelector, popupImageSelector, profileNameInput,
-  profileJobInput, userAvatarSelector, cohort, apiUrl, token, popupCardDeleteSelector, popupAvatarRenewSelector, avatarElement
+  templateSelector,
+  validationValues,
+  profileEditButton,
+  cardAddButton,
+  cardListContainerSelector,
+  userJobSelector,
+  userNameSelector,
+  popupProfileEditSelector,
+  popupCardAddSelector,
+  popupImageSelector,
+  profileNameInput,
+  profileJobInput,
+  userAvatarSelector,
+  cohort,
+  apiUrl,
+  token,
+  popupCardDeleteSelector,
+  popupAvatarRenewSelector,
+  avatarElement
 } from '../components/constants.js';
 import Card from '../components/card.js';
 import FormValidator from '../components/formValidator.js';
@@ -14,7 +29,7 @@ import Api from '../components/api.js';
 import PopupWithOneButton from '../components/popupWithOneButton.js';
 
 // Создаём экземляр класса для работы с API
-const api = new Api (apiUrl, cohort, token);
+const api = new Api(apiUrl, cohort, token);
 // Объявляем экземпляр класса для работы с информацией о пользователе
 const userInfo = new UserInfo(userNameSelector, userJobSelector, userAvatarSelector);
 
@@ -36,12 +51,11 @@ const popupAvatarChange = new PopupWithForm(popupAvatarRenewSelector, (inputValu
     .then((answer) => {
       setUserFromServer();
     })
-    .catch((err) => {console.log(`Произошла ошибка ${err}`)})
+    .catch((err) => {
+      console.log(`Произошла ошибка ${err}`)
+    })
     .finally(() => popupAvatarChange.toggleButtonState())
 })
-
-
-
 
 const cardAddPopup = new PopupWithForm(popupCardAddSelector,
   (inputValues) => {
@@ -53,7 +67,9 @@ const cardAddPopup = new PopupWithForm(popupCardAddSelector,
         cardsListSection.addItemToTop(createCard(inputValues))
       })
       .catch((err) => console.log(err))
-      .finally(() => {cardAddPopup.toggleButtonState()});
+      .finally(() => {
+        cardAddPopup.toggleButtonState()
+      });
   }
 );
 
@@ -67,7 +83,6 @@ const popupWithImage = new PopupWithImage(popupImageSelector);
 const profileFormValidator = new FormValidator(validationValues, profileEditPopup.form());
 const cardAddFormValidator = new FormValidator(validationValues, cardAddPopup.form());
 const avatarChangeValidator = new FormValidator(validationValues, popupAvatarChange.form())
-console.log(popupAvatarChange.form());
 profileFormValidator.enableValidation();
 cardAddFormValidator.enableValidation();
 avatarChangeValidator.enableValidation();
@@ -95,7 +110,9 @@ function setCardListFromServer() {
             cardData.link = card.link;
             cardData.id = card._id;
             cardData.likes = card.likes.length;
-            cardData.isLikedByMe = card.likes.some((like) => {return (like._id === userID)})
+            cardData.isLikedByMe = card.likes.some((like) => {
+              return (like._id === userID)
+            })
             cardData.owner = card.owner._id === userID
             cardsListSection.addItem((createCard(cardData)));
           })
@@ -104,7 +121,7 @@ function setCardListFromServer() {
 }
 
 //Функция установки данных пользователя согласно ответу с сервера
-function setUserFromServer () {
+function setUserFromServer() {
   api.getCurrentUser()
     .then((answer) => userInfo.getUserInfo(answer))
     .then((userData) => userInfo.setUserInfo(userData))
@@ -121,29 +138,21 @@ function renewUserInfo(userData) {
 }
 
 
-
-
-
-
-
-
-
-
 // Объявляем экземпляр класса для работы с разметкой Section
 const cardsListSection = new Section(cardListContainerSelector);
 
 
 //Функции обработчики кнопок открытия попапов с формами
 function handleProfileEditOpen() {
-    api.getCurrentUser()
-      .then((answer) => userInfo.getUserInfo(answer))
-      .then((userData) => {
-        profileNameInput.value = userData.userName;
-        profileJobInput.value = userData.userJob;
-        profileEditPopup.open();
-        profileFormValidator.clearValidation();
-      })
-      .catch((err) => console.log(err));
+  api.getCurrentUser()
+    .then((answer) => userInfo.getUserInfo(answer))
+    .then((userData) => {
+      profileNameInput.value = userData.userName;
+      profileJobInput.value = userData.userJob;
+      profileEditPopup.open();
+      profileFormValidator.clearValidation();
+    })
+    .catch((err) => console.log(err));
 }
 
 function handleCardAddOpen() {
@@ -173,8 +182,7 @@ function createCard(inputValues) {
             card.renewLikeCounter(likes);
           })
           .catch((err) => console.log(err))
-      }
-      else {
+      } else {
         api.removeCardLike(cardID)
           .then((answer) => answer.likes.length)
           .then((likes) => {
@@ -187,12 +195,11 @@ function createCard(inputValues) {
     (cardID, evt) => {
       popupWithOneButton.open(cardID, evt);
     }
-
   );
   return card.create();
 }
 
-function handleAvatarChangeOpen(){
+function handleAvatarChangeOpen() {
   avatarChangeValidator.clearValidation();
   popupAvatarChange.open();
 }

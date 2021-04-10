@@ -12,7 +12,7 @@ export default class PopupWithOneButton extends Popup {
     this._setEventListeners();
   }
 
-  open(cardID, evt){
+  open(cardID, evt) {
     this._evt = evt;
     this._cardID = cardID;
     super.open();
@@ -26,6 +26,6 @@ export default class PopupWithOneButton extends Popup {
   _setEventListeners() {
     this._popupButton.addEventListener('click', this._handleButtonClick)
     super.setEventListeners();
-}
+  }
 
 }
