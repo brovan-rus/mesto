@@ -5,78 +5,86 @@ export default class Api {
     this._groupId = groupId;
   }
 
-  getInitialCards () {
+  getInitialCards() {
     return fetch(`${this._url}/v1/cohort-${this._groupId}/cards`, {
       headers: {
-        authorization: this._token
+        authorization: this._token,
+      },
+    }).then((request) => {
+      if (request.ok) {
+        return request.json();
       }
-    })
-      .then((request) => {
-        if (request.ok) {
-          return request.json();
-        }
-         return  Promise.reject(`Ошибка ${request.status}`);
-      });
+      return Promise.reject(`Ошибка ${request.status}`);
+    });
   }
 
   getCurrentUser() {
     return fetch(`${this._url}/v1/cohort-${this._groupId}/users/me`, {
       headers: {
-        authorization: this._token
+        authorization: this._token,
+      },
+    }).then((request) => {
+      if (request.ok) {
+        return request.json();
       }
-    })
-      .then((request) => {
-        if (request.ok) {
-          return request.json();
-        }
-        return  Promise.reject(`Ошибка ${request.status}`);
-      });
+      return Promise.reject(`Ошибка ${request.status}`);
+    });
   }
 
   setCurrentUser(userData) {
-    return fetch (`${this._url}/v1/cohort-${this._groupId}/users/me`, {
-      method: 'PATCH',
+    return fetch(`${this._url}/v1/cohort-${this._groupId}/users/me`, {
+      method: "PATCH",
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: userData.userName,
         about: userData.userJob,
-      })
-    })
-      .then((answer) => {if (answer.ok) {return (answer.json())}
+      }),
+    }).then((answer) => {
+      if (answer.ok) {
+        return answer.json();
+      }
       return Promise.reject(`Ошибка ${answer.status}`);
-      })
+    });
   }
 
   addNewCard(cardData) {
     return fetch(`${this._url}/v1/cohort-${this._groupId}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: cardData.name,
-        link: cardData.link
-      })
-    })
-        .then((answer) => {if (answer.ok) {return (answer.json())}
-        return Promise.reject(`Ошибка ${answer.status}`);
-    })
+        link: cardData.link,
+      }),
+    }).then((answer) => {
+      if (answer.ok) {
+        return answer.json();
+      }
+      return Promise.reject(`Ошибка ${answer.status}`);
+    });
   }
 
   setCardLike(cardID) {
-    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/likes/${cardID}`, {
-      method: 'PUT',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json',
+    return fetch(
+      `${this._url}/v1/cohort-${this._groupId}/cards/likes/${cardID}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: this._token,
+          "Content-Type": "application/json",
+        },
       }
-    })
-      .then((answer) => {if (answer.ok) {return (answer.json())}
-      return Promise.reject(`Ошибка ${answer.status}`)});
+    ).then((answer) => {
+      if (answer.ok) {
+        return answer.json();
+      }
+      return Promise.reject(`Ошибка ${answer.status}`);
+    });
   }
 
   // getCardData(cardID) {
@@ -93,45 +101,54 @@ export default class Api {
   //     });
   // }
 
-  removeCardLike(cardID){
-    return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/likes/${cardID}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json',
+  removeCardLike(cardID) {
+    return fetch(
+      `${this._url}/v1/cohort-${this._groupId}/cards/likes/${cardID}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: this._token,
+          "Content-Type": "application/json",
+        },
       }
-    })
-      .then((answer) => {if (answer.ok) {return (answer.json())}
-        return Promise.reject(`Ошибка ${answer.status}`)});
+    ).then((answer) => {
+      if (answer.ok) {
+        return answer.json();
+      }
+      return Promise.reject(`Ошибка ${answer.status}`);
+    });
   }
 
   removeCard(cardID) {
     return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/${cardID}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+      },
+    }).then((answer) => {
+      if (answer.ok) {
+        return answer.json();
       }
-    })
-      .then((answer) => {if (answer.ok) {return (answer.json())}
-        return Promise.reject(`Ошибка ${answer.status}`)});
+      return Promise.reject(`Ошибка ${answer.status}`);
+    });
   }
 
   avatarChange(link) {
-    return fetch (`${this._url}/v1/cohort-${this._groupId}/users/me/avatar/`, {
-      method: 'PATCH',
+    return fetch(`${this._url}/v1/cohort-${this._groupId}/users/me/avatar/`, {
+      method: "PATCH",
       headers: {
         authorization: this._token,
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        avatar: link
-      })
-    })
-      .then((answer) => {if (answer.ok) {return (answer.json())}
-        return Promise.reject(`Ошибка ${answer.status}`);
-      })
+        avatar: link,
+      }),
+    }).then((answer) => {
+      if (answer.ok) {
+        return answer.json();
+      }
+      return Promise.reject(`Ошибка ${answer.status}`);
+    });
   }
-
-
 }

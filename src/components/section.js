@@ -10,5 +10,4 @@ export default class Section {
   addItemToTop(item) {
     this._container.prepend(item);
   }
-
 }
