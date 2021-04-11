@@ -1,21 +1,23 @@
+function handleResponse(res) {
+  if (!res.ok) {
+    return Promise.reject(`Ошибка ${res}`);
+  } else {
+    return res.json();
+  }
+}
+
 export default class Api {
   constructor(url, groupId, token) {
     this._url = url;
     this._token = token;
     this._groupId = groupId;
   }
-
   getInitialCards() {
     return fetch(`${this._url}/v1/cohort-${this._groupId}/cards`, {
       headers: {
         authorization: this._token,
       },
-    }).then((request) => {
-      if (request.ok) {
-        return request.json();
-      }
-      return Promise.reject(`Ошибка ${request.status}`);
-    });
+    }).then(handleResponse);
   }
 
   getCurrentUser() {
@@ -23,12 +25,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    }).then((request) => {
-      if (request.ok) {
-        return request.json();
-      }
-      return Promise.reject(`Ошибка ${request.status}`);
-    });
+    }).then(handleResponse);
   }
 
   setCurrentUser(userData) {
@@ -42,12 +39,7 @@ export default class Api {
         name: userData.userName,
         about: userData.userJob,
       }),
-    }).then((answer) => {
-      if (answer.ok) {
-        return answer.json();
-      }
-      return Promise.reject(`Ошибка ${answer.status}`);
-    });
+    }).then(handleResponse);
   }
 
   addNewCard(cardData) {
@@ -61,12 +53,7 @@ export default class Api {
         name: cardData.name,
         link: cardData.link,
       }),
-    }).then((answer) => {
-      if (answer.ok) {
-        return answer.json();
-      }
-      return Promise.reject(`Ошибка ${answer.status}`);
-    });
+    }).then(handleResponse);
   }
 
   setCardLike(cardID) {
@@ -79,27 +66,8 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then((answer) => {
-      if (answer.ok) {
-        return answer.json();
-      }
-      return Promise.reject(`Ошибка ${answer.status}`);
-    });
+    ).then(handleResponse);
   }
-
-  // getCardData(cardID) {
-  //   return fetch(`${this._url}/v1/cohort-${this._groupId}/cards/${cardID}`, {
-  //     headers: {
-  //       authorization: this._token
-  //     }
-  //   })
-  //     .then((request) => {
-  //       if (request.ok) {
-  //         return request.json();
-  //       }
-  //       return  Promise.reject(`Ошибка ${request.status}`);
-  //     });
-  // }
 
   removeCardLike(cardID) {
     return fetch(
@@ -111,12 +79,7 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then((answer) => {
-      if (answer.ok) {
-        return answer.json();
-      }
-      return Promise.reject(`Ошибка ${answer.status}`);
-    });
+    ).then(handleResponse);
   }
 
   removeCard(cardID) {
@@ -126,12 +89,7 @@ export default class Api {
         authorization: this._token,
         "Content-Type": "application/json",
       },
-    }).then((answer) => {
-      if (answer.ok) {
-        return answer.json();
-      }
-      return Promise.reject(`Ошибка ${answer.status}`);
-    });
+    }).then(handleResponse);
   }
 
   avatarChange(link) {
@@ -144,11 +102,6 @@ export default class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then((answer) => {
-      if (answer.ok) {
-        return answer.json();
-      }
-      return Promise.reject(`Ошибка ${answer.status}`);
-    });
+    }).then(handleResponse);
   }
 }

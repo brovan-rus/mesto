@@ -1,34 +1,30 @@
-import Popup from './popup.js';
+import Popup from "./popup.js";
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, submit) {
     super(popupSelector);
     this._submit = submit;
-    this._popupForm = document.querySelector(popupSelector).querySelector('.form');
+    this._popupForm = document
+      .querySelector(popupSelector)
+      .querySelector(".form");
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this.setEventListeners();
-    this._formButton = this._popupForm.querySelector('.form__submit-button');
+    this._formButton = this._popupForm.querySelector(".form__submit-button");
     this._formButtonText = this._formButton.textContent;
   }
 
   form() {
-    return (this._popupForm);
+    return this._popupForm;
   }
 
   _getInputValues(form) {
-    const values = Array.from(form.querySelectorAll('.form__input'))
-      .map(({value}) => {
-        return value
-      });
-    const keys = Array.from(form.querySelectorAll('.form__input'))
-      .map(({name}) => {
-        return name
-      });
-    const inputValues = {}
-    keys.forEach((element, i) => {
-      inputValues[element] = values[i]
-    })
-    return inputValues;
+    return Array.from(form.querySelectorAll(".form__input")).reduce(
+      (result, current) => ({
+        ...result,
+        [current.name]: current.value,
+      }),
+      {}
+    );
   }
 
   _handleFormSubmit(evt) {
@@ -40,11 +36,9 @@ export default class PopupWithForm extends Popup {
 
   toggleButtonState() {
     if (this._formButtonText === this._formButton.textContent) {
-      this._formButton.textContent = 'Сохранение...'
-    }
-    else this._formButton.textContent = this._formButtonText
+      this._formButton.textContent = "Сохранение...";
+    } else this._formButton.textContent = this._formButtonText;
   }
-
 
   close() {
     this._popupForm.reset();
@@ -52,7 +46,7 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    this._popupForm.addEventListener('submit', this._handleFormSubmit);
+    this._popupForm.addEventListener("submit", this._handleFormSubmit);
     super.setEventListeners();
   }
 }

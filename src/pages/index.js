@@ -109,37 +109,32 @@ avatarChangeValidator.enableValidation();
 
 // Функция заполнения карточек согласно запросу с сервера
 function setCardListFromServer() {
-  api
-    .getCurrentUser()
-    .then((userInfo) => {
-      return userInfo._id;
-    })
-    .then((userID) => {
-      api.getInitialCards().then((cardsList) => {
-        const cardData = [
-          {
-            name: "",
-            link: "",
-            id: "",
-            likes: 0,
-            isLikedByMe: false,
-            owner: false,
-          },
-        ];
+  Promise.all([api.getCurrentUser(), api.getInitialCards()]).then(
+    ([userInfo, cardsList]) => {
+      const cardData = [
+        {
+          name: "",
+          link: "",
+          id: "",
+          likes: 0,
+          isLikedByMe: false,
+          owner: false,
+        },
+      ];
 
-        cardsList.forEach((card) => {
-          cardData.name = card.name;
-          cardData.link = card.link;
-          cardData.id = card._id;
-          cardData.likes = card.likes.length;
-          cardData.isLikedByMe = card.likes.some((like) => {
-            return like._id === userID;
-          });
-          cardData.owner = card.owner._id === userID;
-          cardsListSection.addItem(createCard(cardData));
+      cardsList.forEach((card) => {
+        cardData.name = card.name;
+        cardData.link = card.link;
+        cardData.id = card._id;
+        cardData.likes = card.likes.length;
+        cardData.isLikedByMe = card.likes.some((like) => {
+          return like._id === userInfo._id;
         });
+        cardData.owner = card.owner._id === userInfo._id;
+        cardsListSection.addItem(createCard(cardData));
       });
-    });
+    }
+  );
 }
 
 //Функция установки данных пользователя согласно ответу с сервера
